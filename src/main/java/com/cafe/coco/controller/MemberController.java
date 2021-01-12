@@ -31,7 +31,6 @@ public class MemberController {
         member.setName(memberForm.getName());
 
         memberService.join(member);
-        System.out.println("성공");
         return "redirect:/";
     }
 
