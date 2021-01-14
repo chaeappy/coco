@@ -1,8 +1,8 @@
 package com.cafe.coco;
 
-import com.cafe.coco.repository.JdbcMemberRepository;
-import com.cafe.coco.repository.MemberRepository;
-import com.cafe.coco.service.MemberService;
+import com.cafe.coco.repository.JdbcCustomerRepository;
+import com.cafe.coco.repository.CustomerRepository;
+import com.cafe.coco.service.customerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,13 +20,13 @@ public class SpringConfig {
     }
 
     @Bean
-    public MemberService memberService() {
-        return new MemberService(memberRepository());
+    public customerService memberService() {
+        return new customerService(memberRepository());
     }
 
     @Bean
-    public MemberRepository memberRepository() {
+    public CustomerRepository memberRepository() {
 //        return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+        return new JdbcCustomerRepository(dataSource);
     }
 }
