@@ -1,10 +1,15 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/img/logo.png}" />
+    <link href="/css/home.css" rel="stylesheet" type="text/css" />
+</head>
 <body>
 <div id="page">
     <div id="top"></div>
     <div class="ctr-p" id="two">
-        <img src="/resources/img/logo.png" />
+        <img src="/img/logo.png" />
     </div>
     <div class="ctr-p" id="bottom">
         <button class="button" id="logBtn" onclick="location.href='/customers/login'">로그인</button>

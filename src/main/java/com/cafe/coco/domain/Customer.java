@@ -5,6 +5,24 @@ public class Customer {
     String id;
     String password;
 
+    public Customer(Long pk, String id, String password) {
+        this.pk = pk;
+        this.id = id;
+        this.password = password;
+    }
+
+    public Customer() {
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "pk=" + pk +
+                ", id='" + id + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
     public Long getPk() {
         return pk;
     }

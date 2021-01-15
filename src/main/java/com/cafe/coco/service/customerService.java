@@ -16,19 +16,26 @@ public class customerService {
     /**
      * 회원가입
      */
-    public Long join(Customer customer) {
-
-        vaildateDuplicateCustomer(customer); // 중복회원 검사
-        customerRepository.save(customer);
-        return customer.getPk();
+    public Customer join(Customer customer) {
+        // 아이디 중복검사
+        if (customerRepository.findById(customer.getId())) {
+            customerRepository.save(customer);
+        }
+        return customer;
     }
 
-    private void vaildateDuplicateCustomer(Customer customer) {
-        customerRepository.findById(customer.getId())
-                .ifPresent(m -> {
-                    throw new IllegalStateException("이미 존재하는 회원입니다.");
-                });
+    /**
+     * 로그인
+     */
+    public Customer login(Customer customer) {
+        checkForLogin(customer);
+        return null;
     }
+
+    private void checkForLogin(Customer customer) {
+//        customerRepository.findById();
+    }
+
 
     /**
      * 전체 회원조회
@@ -37,7 +44,7 @@ public class customerService {
         return customerRepository.findAll();
     }
 
-    public Optional<Customer> findOne(Long customerPk) {
-        return customerRepository.findByPk(customerPk);
+    public Customer findOne(String id, String password) {
+        return customerRepository.findOne(id, password);
     }
 }

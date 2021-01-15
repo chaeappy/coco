@@ -6,7 +6,6 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
-import java.util.Optional;
 
 public class JdbcCustomerRepository implements CustomerRepository {
     private final DataSource dataSource;
@@ -30,29 +29,71 @@ public class JdbcCustomerRepository implements CustomerRepository {
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
 
-            if (resultSet != null) {
+            if (resultSet.next()) {
                 customer.setPk(resultSet.getLong(1));
             } else {
                 throw new SQLException("id 조회실패");
             }
-            return customer;
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             close(connection, preparedStatement, resultSet);
+            return customer;
         }
-        return customer;
+    }
+
+
+    @Override
+    public boolean findById(String id) {
+        sql = "SELECT * FROM customer where id = (?);";
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
+        return true;
     }
 
     @Override
-    public Optional<Customer> findByPk(Long pk) {
-        return Optional.empty();
+    public Customer findByPassword(Long pk) {
+        return null;
     }
 
     @Override
-    public Optional<Customer> findById(String id) {
-        return Optional.empty();
+    public Customer findOne(String id, String password) {
+        sql = "SELECT * FROM customer WHERE id = (?) and password = (?);";
+        Customer customer = null;
+        Long pk = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, password);
+            resultSet = preparedStatement.executeQuery();
+
+            // resultSet은 != null 사용할 수 없음 주의
+            if (resultSet.next()) {
+                pk = resultSet.getLong("pk");
+                id = resultSet.getString("id");
+                password = resultSet.getString("password");
+                customer = new Customer(pk, id, password);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+            return customer;
+        }
     }
 
     @Override
@@ -64,11 +105,10 @@ public class JdbcCustomerRepository implements CustomerRepository {
         return DataSourceUtils.getConnection(dataSource);
     }
 
-    private void close(Connection connection) throws SQLException {
-        DataSourceUtils.releaseConnection(connection, dataSource);
-
-
-    }
+//    private void close(Connection connection) throws SQLException {
+//        DataSourceUtils.releaseConnection(connection, dataSource);
+//
+//    }
 
 
     private void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {

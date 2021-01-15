@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+.ctr-p {
+	margin-left: auto;
+	margin-right: auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	font-size: large;
+}
+
+div#page {
+	position: absolute;
+	margin: 0 auto;
+	top: 0;
+	left: 0;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+}
+
+div#top {
+	margin: 0 auto;
+	position: absolute;
+	width: 100%;
+	height: 180px;
+	width: 100%;
+
+}
+
+div#two {
+	top: 180px;
+	width: 200px;
+	height: 130px;
+}
+
+div#bottom {
+	top: 310px;
+	width: 250px;
+	height: 300px;
+}
+
+button.button {
+	border: 3px outset ;
+	background-color: #c9c8ca;
+	font-size: 110%;
+	color: #484849;
+	padding: 20px;
+	width: 250px;
+	margin: 5px auto;
+	border-radius: 15px;
+
+}
+
+button#logBtn {
+	margin-top: 20px;
+}
+
+img {
+	margin-top: 10px;
+	max-width: 100%;
+	max-height: 100%;
+}
+

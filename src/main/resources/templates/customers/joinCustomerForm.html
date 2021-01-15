@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/img/logo.png}"/>
+    <link href="/css/joinCustomerForm.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="page">
+    <div id="top">
+        <div id="topHomeBtn">
+            <button type=submit class="button" id="homeBtn" onclick="homePage()">HOME</button>
+        </div>
+        <div class="ctr-p" id="topTwo">
+            <div id="topLogo">
+                <img src="/img/logo.png" />
+            </div>
+            <div id="topNamed">
+                <span id="letter">회원가입</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="ctr-p" id="two">
+        <div class="ctr-p" id="solid">
+            <div id="id"></div>
+            <div id="inputId">
+                <form method="post">
+                    <input type="text" id="inputIdText" placeholder="아이디" />
+                    <button type="submit" class="button" id="overLappingBtn">중복확인</button>
+                </form>
+            </div>
+            <div id="pw"></div>
+            <div id="inputPw">
+                <form method="post">
+                    <input type="password" id="inputPwText" placeholder="비밀번호" /><br>
+                    <input type="password" id="inputPwText2" placeholder="비밀번호 재확인" />
+                </form>
+            </div>
+        </div>
+        <div class="ctr-p" id="three">
+            <button type="submit" class="button" id="joinBtn">완료</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

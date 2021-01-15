@@ -5,7 +5,6 @@ import com.cafe.coco.domain.Customer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 public class MemoryCustomerRepository implements CustomerRepository {
     private static HashMap<Long, Customer> store = new HashMap<Long, Customer>();
@@ -19,15 +18,18 @@ public class MemoryCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> findByPk(Long pk) {
-        return Optional.ofNullable(store.get(pk));
+    public Customer findByPassword(Long pk) {
+        return null;
     }
 
     @Override
-    public Optional<Customer> findById(String id) {
-        return store.values().stream()
-                .filter(member -> member.getId().equals(id))
-                .findAny();
+    public boolean findById(String id) {
+        return true;
+    }
+
+    @Override
+    public Customer findOne(String id, String password) {
+        return null;
     }
 
     @Override

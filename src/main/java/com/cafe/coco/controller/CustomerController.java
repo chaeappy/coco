@@ -2,6 +2,8 @@ package com.cafe.coco.controller;
 
 import com.cafe.coco.domain.Customer;
 import com.cafe.coco.service.customerService;
+import org.mariadb.jdbc.internal.logging.Logger;
+import org.mariadb.jdbc.internal.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,8 @@ import java.util.List;
 public class CustomerController {
 
     private final customerService customerService;
+    String id = null;
+    String password = null;
 
     @Autowired
     public CustomerController(customerService customerService) {
@@ -21,8 +25,8 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/new")
-    public String createForm() {
-        return "customers/createCustomerForm";
+    public String joinCustomerForm() {
+        return "customers/joinCustomerForm";
     }
 
     @PostMapping("/customers/new")
@@ -31,8 +35,14 @@ public class CustomerController {
         customer.setId(customerForm.getId());
         customer.setPassword(customerForm.getPassword());
 
-        customerService.join(customer);
-        return "redirect:/";
+        customer = customerService.join(customer);
+        if (customer.getPk() != null)  {
+            System.out.println("회원가입 완료");
+            return "redirect:/";
+        } else {
+            System.out.println("회원가입 실패");
+            return "redirect:/customers/new";
+        }
     }
 
     @GetMapping("/customers/login")
@@ -42,9 +52,16 @@ public class CustomerController {
 
     @PostMapping("customers/login")
     public String login(CustomerForm customerForm) {
-        Customer customer = new Customer();
-        customer.setId(customerForm.getId());
-        return "order";
+        id = customerForm.getId();
+        password = customerForm.getPassword();
+        Customer customer = customerService.findOne(id, password);
+        System.out.println(customer);
+        if (customer != null) {
+            return "orders/orderForm";
+        } else {
+            System.out.println("로그인 실패");
+            return "redirect:/customers/login";
+        }
     }
 
     @GetMapping("/customers")
