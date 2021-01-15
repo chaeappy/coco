@@ -108,7 +108,8 @@ span {
 }
 
 button.button {
-	border: 3px outset;
+	border: 3px solid ;
+    border-color: #727274;
 	background-color: #c9c8ca;
 	font-size: 100%;
 	color: #515152;

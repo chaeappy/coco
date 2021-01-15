@@ -40,8 +40,10 @@ div#bottom {
 	height: 300px;
 }
 
+
 button.button {
-	border: 3px outset ;
+	border: 3px solid ;
+	border-color: #727274;
 	background-color: #c9c8ca;
 	font-size: 110%;
 	color: #484849;
