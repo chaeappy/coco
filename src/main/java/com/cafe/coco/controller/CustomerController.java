@@ -48,18 +48,13 @@ public class CustomerController {
 
     @ResponseBody
     @RequestMapping(value = "/customers/new/idCheck", method = RequestMethod.POST)
+    // @RequestBody가 자바 객체로 변환해줌
     public String idCheck(@RequestBody String id) throws ParseException {
-        // customer가 보낸 id값
-
-        System.out.println("확인 =" + id);
-
-
-
         if (customerService.findById(id)) {
-            System.out.println("[intellij] 사용가능한 아이디");
+            // 사용 가능한 id일 경우 0 리턴
             return "0";
         } else {
-            System.out.println("[intellij] 사용불가");
+            // 사용중인 아이디 -1 리턴
             return "-1";
         }
     }
