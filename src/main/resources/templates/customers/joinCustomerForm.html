@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <link th:href="@{/img/logo.png}"/>
     <link href="/css/joinCustomerForm.css" rel="stylesheet" type="text/css"/>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <div id="page">
@@ -23,12 +23,11 @@
         </div>
     </div>
     <div class="ctr-p" id="two">
-        <form name="join" method="post">
             <div class="ctr-p" id="solid">
                 <div id="id"></div>
                 <div id="inputId">
                     <input type="text" id="inputIdText" name="id" placeholder="아이디"/>
-                    <button class="button" id="idCheckBtn" onclick="getData();">중복확인</button>
+                    <button class="button" id="idCheckBtn" onclick="check();">중복확인</button>
                 </div>
                 <div id="pw"></div>
                 <div id="inputPw">
@@ -39,10 +38,30 @@
             <div class="ctr-p" id="three">
                 <button type="submit" class="button" id="joinBtn">완료</button>
             </div>
-        </form>
     </div>
 </div>
 </body>
-<script type="text/javascript" src="/js/joinCustomerForm.js"></script>
+<script type="text/javascript">
+    function check() {
+        id = $("#inputIdText").val();
+        alert(id);
+        $.ajax({
+            url: "/customers/new/idCheck",
+            data: id,
+            dataType: "text",
+            contentType: "text/plain; charset=utf-8;",
+            type: "POST",
+            success: function(data) {
+                alert(data);
+<!--            },-->
+<!--            error: function() {-->
+<!--                alert("에러");-->
+            }
+        });
+
+
+    };
+</script>
+
 </html>
 
