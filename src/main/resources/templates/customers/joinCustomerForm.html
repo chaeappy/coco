@@ -44,18 +44,21 @@
 <script type="text/javascript">
     function check() {
         id = $("#inputIdText").val();
-        alert(id);
         $.ajax({
             url: "/customers/new/idCheck",
             data: id,
             dataType: "text",
-<!--            contentType: "text/plain; charset=utf-8;",-->
+            contentType: "text/plain; charset=utf-8;",
             type: "POST",
             success: function(data) {
-                alert(data);
-<!--            },-->
-<!--            error: function() {-->
-<!--                alert("에러");-->
+                if (data == 0) {
+                    alert("사용 가능한 아이디입니다.");
+                } else {
+                    alert("이미 사용중인 아이디입니다.");
+                }
+            },
+            error: function() {
+                alert("에러");
             }
         });
 
