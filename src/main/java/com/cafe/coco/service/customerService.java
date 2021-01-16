@@ -18,10 +18,14 @@ public class customerService {
      */
     public Customer join(Customer customer) {
         // 아이디 중복검사
-        if (customerRepository.findById(customer.getId())) {
+        if (findById(customer.getId())) {
             customerRepository.save(customer);
         }
         return customer;
+    }
+
+    public boolean findById(String id) {
+        return customerRepository.findById(id);
     }
 
     /**

@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <link th:href="@{/img/logo.png}"/>
     <link href="/css/joinCustomerForm.css" rel="stylesheet" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <body>
 <div id="page">
@@ -22,14 +23,12 @@
         </div>
     </div>
     <div class="ctr-p" id="two">
-        <form name="join" action="/customers/new" method="post">
+        <form name="join" method="post">
             <div class="ctr-p" id="solid">
                 <div id="id"></div>
                 <div id="inputId">
-<!--                    <form name="checkId" method="post">-->
-                        <input type="text" id="inputIdText" name="id" placeholder="아이디"/>
-                        <button type="submit" class="button" id="overLappingBtn">중복확인</button>
-<!--                    </form>-->
+                    <input type="text" id="inputIdText" name="id" placeholder="아이디"/>
+                    <button class="button" id="idCheckBtn" onclick="getData();">중복확인</button>
                 </div>
                 <div id="pw"></div>
                 <div id="inputPw">
@@ -44,5 +43,6 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="/js/joinCustomerForm.js"></script>
 </html>
 

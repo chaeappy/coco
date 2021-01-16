@@ -7,9 +7,9 @@ import org.mariadb.jdbc.internal.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -28,7 +28,6 @@ public class CustomerController {
     public String joinCustomerForm() {
         return "customers/joinCustomerForm";
     }
-
     @PostMapping("/customers/new")
     public String create(CustomerForm customerForm) {
         Customer customer = new Customer();
@@ -42,6 +41,17 @@ public class CustomerController {
         } else {
             System.out.println("회원가입 실패");
             return "redirect:/customers/new";
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/customers/new/idCheck", method = RequestMethod.POST)
+    public void idCheck(HttpServletRequest request, Model model) {
+        String id = request.getParameter("id");
+        if (customerService.findById(id)) {
+            System.out.println("사용가능한 아이디");
+        } else {
+            System.out.println("사용불가");
         }
     }
 
