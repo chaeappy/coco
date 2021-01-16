@@ -31,18 +31,19 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/new")
-    public String create(CustomerForm customerForm) {
+    public String create(@RequestBody String js) {
+        System.out.println(js);
+        String[] strArr = js.split(",");
         Customer customer = new Customer();
-        customer.setId(customerForm.getId());
-        customer.setPassword(customerForm.getPassword());
-
+        customer.setId(strArr[0]);
+        customer.setPassword(strArr[1]);
         customer = customerService.join(customer);
         if (customer.getPk() != null)  {
             System.out.println("회원가입 완료");
-            return "redirect:/";
+            return "0";
         } else {
             System.out.println("[controller]회원가입 실패");
-            return "redirect:/customers/new";
+            return "-1";
         }
     }
 
