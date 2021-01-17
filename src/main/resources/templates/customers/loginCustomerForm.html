@@ -28,23 +28,25 @@
 <script type="text/javascript">
     function popup() {
         id = $("#inputIdText").val();
-        alert(id);
         password = $("#password").val();
         data = id + "," + password;
-<!--        $.ajax({-->
-<!--            url: "/customers/login",-->
-<!--            data: data,-->
-<!--            dataType: "text",-->
-<!--            contentType: "text/plain; charset=utf-8;",-->
-<!--            type: "POST",-->
-<!--            success: function(data) {-->
-<!--                if (data == 0){-->
-<!--                    location.href="http://localhost:8080/orders/orderForm";-->
-<!--                } else {-->
-<!--                    alert("로그인 실패");-->
-<!--                }-->
-<!--            }-->
-<!--        });-->
+        $.ajax({
+            url: "/customers/login",
+            data: data,
+            dataType: "text",
+            contentType: "text/plain; charset=utf-8;",
+            type: "POST",
+            success: function(data) {
+                if (data == 0){
+                    location.href="http://localhost:8080/orders";
+                } else {
+                    alert("로그인 실패");
+                    $("#password").val('');
+                    $("#password").focus();
+
+                }
+            }
+        });
     };
 
 </script>
