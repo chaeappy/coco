@@ -23,7 +23,6 @@
         </div>
     </div>
     <div class="ctr-p" id="two">
-        <form action="/customers/new" method="post">
             <div class="ctr-p" id="solid">
                 <div id="id"></div>
                 <div id="inputId">
@@ -37,9 +36,8 @@
                 </div>
             </div>
             <div class="ctr-p" id="three">
-                <button type="submit" class="button" id="joinBtn">완료</button>
+                <button type="button" class="button" id="joinBtn" onclick="join();">완료</button>
             </div>
-        </form>
     </div>
 </div>
 </body>
@@ -67,29 +65,32 @@
         });
     };
 
-<!--    function join() {-->
-<!--        id = $("#inputIdText").val();-->
-<!--        password = $("#inputPwText").val();-->
-<!--        password2 = $("#inputPwText2").val();-->
-<!--        data = id + "," + password;-->
-<!--        if (password == password2) {-->
-<!--            $.ajax({-->
-<!--                url: "/customers/new",-->
-<!--                data: data,-->
-<!--                dataType: "text",-->
-<!--                contentType: "text/plain; charset=utf-8;",-->
-<!--                type: "POST",-->
-<!--                success: function(data) {-->
-<!--                    if (data == 0){-->
-<!--                        location.href="http://localhost:8080";-->
-<!--                    }-->
-<!--                }-->
-<!--            });-->
-<!--        } else {-->
-<!--            alert("비밀번호 확인 불일치");-->
-<!--        }-->
+    function join() {
+        id = $("#inputIdText").val();
+        password = $("#inputPwText").val();
+        password2 = $("#inputPwText2").val();
+        data = id + "," + password;
+        if (password == password2) {
+            $.ajax({
+                url: "/customers/new",
+                data: data,
+                dataType: "text",
+                contentType: "text/plain; charset=utf-8;",
+                type: "POST",
+                success: function(data) {
+                    if (data == 0){
+                        alert("회원가입 성공");
 
-<!--    };-->
+                    } else {
+                        alert("회원가입 실패");
+                    }
+                }
+            });
+        } else {
+            alert("비밀번호 확인 불일치");
+        }
+
+    };
 
 
 </script>

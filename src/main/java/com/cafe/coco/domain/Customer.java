@@ -11,6 +11,11 @@ public class Customer {
         this.password = password;
     }
 
+    public Customer(String id, String password) {
+        this.id = id;
+        this.password = password;
+    }
+
     public Customer() {
     }
 

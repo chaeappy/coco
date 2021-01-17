@@ -30,20 +30,34 @@ public class CustomerController {
         return "customers/joinCustomerForm";
     }
 
+    @ResponseBody
     @PostMapping("/customers/new")
-    public String create(CustomerForm customerForm) {
-        Customer customer = new Customer();
-        customer.setId(customerForm.getId());
-        customer.setPassword(customerForm.getPassword());
+    public String create(@RequestBody String info) {
+        String[] strArr = info.split(",");
+        Customer customer = new Customer(strArr[0], strArr[1]);
         customer = customerService.join(customer);
         if (customer.getPk() != null)  {
             System.out.println("회원가입 완료");
-            return "home";
+            return "0";
         } else {
             System.out.println("[controller]회원가입 실패");
-            return "customers/new";
+            return "-1";
         }
     }
+//    @PostMapping("/customers/new")
+//    public String create(CustomerForm customerForm) {
+//        Customer customer = new Customer();
+//        customer.setId(customerForm.getId());
+//        customer.setPassword(customerForm.getPassword());
+//        customer = customerService.join(customer);
+//        if (customer.getPk() != null)  {
+//            System.out.println("회원가입 완료");
+//            return "home";
+//        } else {
+//            System.out.println("[controller]회원가입 실패");
+//            return "customers/new";
+//        }
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/customers/new/idCheck", method = RequestMethod.POST)

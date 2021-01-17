@@ -18,9 +18,9 @@ public class customerService {
      */
     public Customer join(Customer customer) {
         // 아이디 중복검사
-        if (findById(customer.getId())) {
+//        if (findById(customer.getId())) {
             customerRepository.save(customer);
-        }
+//        }
         return customer;
     }
 
