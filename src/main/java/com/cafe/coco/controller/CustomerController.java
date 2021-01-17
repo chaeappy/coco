@@ -72,24 +72,38 @@ public class CustomerController {
         }
     }
 
+
     @GetMapping("/customers/login")
     public String loginForm() {
         return "customers/loginCustomerForm";
     }
 
+    @ResponseBody
     @PostMapping("customers/login")
-    public String login(CustomerForm customerForm) {
-        id = customerForm.getId();
-        password = customerForm.getPassword();
-        Customer customer = customerService.findOne(id, password);
+    public String login(@RequestBody String info) {
+        String[] strArr = info.split(",");
+        Customer customer = customerService.findOne(strArr[0], strArr[1]);
         System.out.println(customer);
         if (customer != null) {
-            return "orders/orderForm";
+            return "0";
         } else {
             System.out.println("로그인 실패");
-            return "redirect:/customers/login";
+            return "-1";
         }
     }
+//    @PostMapping("customers/login")
+//    public String login(CustomerForm customerForm) {
+//        id = customerForm.getId();
+//        password = customerForm.getPassword();
+//        Customer customer = customerService.findOne(id, password);
+//        System.out.println(customer);
+//        if (customer != null) {
+//            return "orders/orderForm";
+//        } else {
+//            System.out.println("로그인 실패");
+//            return "redirect:/customers/login";
+//        }
+//    }
 
     @GetMapping("/customers")
     public String list(Model model) {
