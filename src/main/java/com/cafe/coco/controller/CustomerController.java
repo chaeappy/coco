@@ -33,7 +33,7 @@ public class CustomerController {
     @PostMapping("/customers/new")
     public String create(CustomerForm customerForm) {
         System.out.println(customerForm.getId());
-        
+
         return "home";
 //        String[] strArr = js.split(",");
 //        Customer customer = new Customer();
