@@ -32,21 +32,17 @@ public class CustomerController {
 
     @PostMapping("/customers/new")
     public String create(CustomerForm customerForm) {
-        System.out.println(customerForm.getId());
-
-        return "home";
-//        String[] strArr = js.split(",");
-//        Customer customer = new Customer();
-//        customer.setId(strArr[0]);
-//        customer.setPassword(strArr[1]);
-//        customer = customerService.join(customer);
-//        if (customer.getPk() != null)  {
-//            System.out.println("회원가입 완료");
-//            return "0";
-//        } else {
-//            System.out.println("[controller]회원가입 실패");
-//            return "-1";
-//        }
+        Customer customer = new Customer();
+        customer.setId(customerForm.getId());
+        customer.setPassword(customerForm.getPassword());
+        customer = customerService.join(customer);
+        if (customer.getPk() != null)  {
+            System.out.println("회원가입 완료");
+            return "home";
+        } else {
+            System.out.println("[controller]회원가입 실패");
+            return "customers/new";
+        }
     }
 
     @ResponseBody
