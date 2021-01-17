@@ -82,8 +82,8 @@ public class CustomerController {
     @PostMapping("/customers/login")
     public String login(@RequestBody String info) throws ParseException {
         String[] strArr = info.split(",");
-        System.out.println("");
-        System.out.println("");
+        System.out.println(strArr[0]);
+        System.out.println(strArr[1]);
         Customer customer = customerService.findOne(strArr[0], strArr[1]);
         if (customer != null) {
             return "0";

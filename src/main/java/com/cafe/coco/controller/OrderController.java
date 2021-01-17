@@ -8,6 +8,6 @@ public class OrderController {
 
     @GetMapping("/orders")
     public String orderForm() {
-        return "orderForm";
+        return "orders/orderForm";
     }
 }
