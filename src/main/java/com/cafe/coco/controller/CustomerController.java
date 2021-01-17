@@ -79,11 +79,11 @@ public class CustomerController {
     }
 
     @ResponseBody
-    @PostMapping("customers/login")
-    public String login(@RequestBody String info) {
+    @PostMapping("/customers/login")
+    public String login(@RequestBody String info) throws ParseException {
         String[] strArr = info.split(",");
         Customer customer = customerService.findOne(strArr[0], strArr[1]);
-        System.out.println(customer);
+        System.out.println(customer.getId());
         if (customer != null) {
             return "0";
         } else {
