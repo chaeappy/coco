@@ -31,20 +31,21 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/new")
-    public String create(@RequestBody String js) {
-        System.out.println(js);
-        String[] strArr = js.split(",");
-        Customer customer = new Customer();
-        customer.setId(strArr[0]);
-        customer.setPassword(strArr[1]);
-        customer = customerService.join(customer);
-        if (customer.getPk() != null)  {
-            System.out.println("회원가입 완료");
-            return "0";
-        } else {
-            System.out.println("[controller]회원가입 실패");
-            return "-1";
-        }
+    public String create(CustomerForm customerForm) {
+        System.out.println(customerForm.getId());
+        return "home";
+//        String[] strArr = js.split(",");
+//        Customer customer = new Customer();
+//        customer.setId(strArr[0]);
+//        customer.setPassword(strArr[1]);
+//        customer = customerService.join(customer);
+//        if (customer.getPk() != null)  {
+//            System.out.println("회원가입 완료");
+//            return "0";
+//        } else {
+//            System.out.println("[controller]회원가입 실패");
+//            return "-1";
+//        }
     }
 
     @ResponseBody
