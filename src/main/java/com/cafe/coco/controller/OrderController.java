@@ -7,7 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class OrderController {
 
     @GetMapping("/orders")
+    public String orderHome() {
+        return "orders/orderHome";
+    }
+
+    @GetMapping("/orders/orderForm")
     public String orderForm() {
         return "orders/orderForm";
     }
+
+
 }

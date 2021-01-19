@@ -1,10 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/img/logo.png}" />
+    <link href="/css/orders/orderForm.css" rel="stylesheet" type="text/css" />
+</head>
 <body>
 <div class="container">
     <div>
-        <h1>주문</h1>
-        </p>
+        <div id="div_head"></div>
+        <div id="div_body">
+            <div class ="div_body" id="div_body_l">
+                <div id="div_body_l_h">
+                    <div class="div_body_l_h">번호</div>
+                    <div class="div_body_l_h">음료</div>
+                    <div class="div_body_l_h">가격</div><br>
+                </div>
+                <div id="div_body_l_b">
+                    <div id="div_body_l_b_1">
+                        <label for="input1">1</label>
+                        <input id="input1"type="button" value="(H)아메리카노 1500원"/>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <input type="button" value="1 (H)아메리카노 1500원"></input><br>
+                    <input type="button"></input><br>
+                    <input type="button"></input><br>
+                </div>
+            </div>
+            <div class ="div_body" id="div_body_r">네모</div>
+
+        </div>
     </div>
 </div> <!-- /container -->
 

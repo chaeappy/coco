@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/img/logo.png}" />
+    <link href="/css/orders/orderHome.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="page">
+    <div id="top"></div>
+    <div class="ctr-p" id="two">
+        <img src="/img/logo.png" />
+    </div>
+    <div class="ctr-p" id="bottom">
+        <button class="button" id="logBtn" onclick="location.href='/orders/orderForm'">주문</button>
+        <button class="button" onclick="location.href='/customers/new'">결제취소</button>
+        <button class="button">영수증재발행</button>
+    </div>
+</div>
+</body>
+</html>
