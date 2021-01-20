@@ -6,10 +6,10 @@ import com.cafe.coco.repository.CustomerRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class customerService {
+public class CustomerService {
     private final CustomerRepository customerRepository;
 
-    public customerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 

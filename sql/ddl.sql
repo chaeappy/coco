@@ -24,3 +24,36 @@
     auto_increment 초기화 {
         ALTER TABLE 테이블명 AUTO_INCREMENT = ?;
     } --> ? 시작할 값
+
+
+
+CREATE TABLE `customer` (
+  `pk` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(30) DEFAULT NULL,
+  `password` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`pk`),
+  UNIQUE KEY `EMAIL` (`id`),
+  UNIQUE KEY `EMAIL_2` (`id`)
+)
+
+
+CREATE TABLE `drink` (
+  `pk` bigint(20) NOT NULL,
+  `name` varchar(30) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `sales` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pk`)
+)
+
+CREATE TABLE `payment` (
+  `pk` bigint(20) NOT NULL,
+  `payment_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `customer_id` varchar(30) DEFAULT NULL,
+  `way` varchar(30) DEFAULT NULL,
+  `total` int(11) DEFAULT NULL,
+  `cash_receipt` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`pk`),
+  UNIQUE KEY `pDATE` (`payment_date`),
+  KEY `customer_id` (`customer_id`)
+)
+
