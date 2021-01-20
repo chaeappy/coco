@@ -1,7 +1,9 @@
 package com.cafe.coco.service;
 
-
+import com.cafe.coco.domain.Drink;
 import com.cafe.coco.repository.OrderRepository;
+
+import java.util.HashMap;
 
 public class OrderService {
     private final OrderRepository orderRepository;
@@ -11,19 +13,26 @@ public class OrderService {
     }
 
     /**
-     * 메뉴출력
+     * 메뉴생성 및 출력
      */
-
-
-    /**
-     * 메뉴선택(1라인)
-     */
+    public HashMap menu() {
+        return orderRepository.menu();
+    }
 
     /**
-     * 선택메뉴 출력
+     * 메뉴선택
      */
+    public HashMap input() {
+
+        return null;
+
+    }
 
     /**
-     * 토탈금액
+     * @return
      */
+    public HashMap modifyInput() {
+        return null;
+
+    }
 }
