@@ -13,7 +13,7 @@ public interface OrderRepository {
     /**
      * 메뉴선택
      */
-    HashMap input();
+    HashMap input(Long pk);
 
     /**
      * @return

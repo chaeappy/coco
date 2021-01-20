@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
 
 public class JdbcOrderRepository implements OrderRepository{
     DataSource dataSourceForDrink = null;
@@ -19,6 +18,7 @@ public class JdbcOrderRepository implements OrderRepository{
     String sql = null;
 
     HashMap<Long, Drink> menu = new HashMap<>();
+    HashMap<Drink, Integer> choices = new HashMap<>();
 
     public JdbcOrderRepository(DataSource dataSourceForDrink) {
         this.dataSourceForDrink = dataSourceForDrink;
@@ -46,6 +46,7 @@ public class JdbcOrderRepository implements OrderRepository{
                 Drink drink = new Drink(pk, name, price);
                 if (drink != null) {
                     menu.put(pk, drink);
+                    choices.put(drink, 0);
                 }
             }
         } catch (SQLException e) {
@@ -60,8 +61,11 @@ public class JdbcOrderRepository implements OrderRepository{
      * 메뉴선택
      */
     @Override
-    public HashMap input() {
-        return null;
+    public HashMap input(Long pk) {
+        Drink drink = menu.get(pk);
+        int howMany = choices.get(drink);
+        choices.put(drink, ++howMany);
+        return choices;
     }
 
     @Override
@@ -69,6 +73,9 @@ public class JdbcOrderRepository implements OrderRepository{
         return null;
     }
 
+    /**
+     * 메뉴 HashMap 청소
+     */
     private void cleanHashMap() {
         if (menu != null) {
             menu.clear();

@@ -22,9 +22,8 @@ public class OrderService {
     /**
      * 메뉴선택
      */
-    public HashMap input() {
-
-        return null;
+    public HashMap input(Long pk) {
+        return orderRepository.input(pk);
 
     }
 
