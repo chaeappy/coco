@@ -8,14 +8,20 @@
 <body>
 <div class="container">
     <div>
-        <div id="div_head"></div>
-        <div id="div_body">
-            <div class ="div_body" id="div_body_l">
-               
-            </div>
-            <div class ="div_body" id="div_body_r">네모</div>
-
-        </div>
+    <table>
+        <thead>
+            <tr>
+                <td>음료</td>
+                <td>가격</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="drink : ${menus}">
+                <td th:text="${drink.name}"></td>
+                <td th:text="${drink.price}"></td>
+            </tr>
+        </tbody>
+    </table>
     </div>
 </div> <!-- /container -->
 

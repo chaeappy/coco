@@ -1,5 +1,6 @@
 package com.cafe.coco.controller;
 
+import com.cafe.coco.domain.Drink;
 import com.cafe.coco.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import java.util.List;
 public class OrderController {
     OrderService orderService;
 
+    @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
@@ -25,7 +27,7 @@ public class OrderController {
 
     @GetMapping("/orders/orderForm")
     public String orderForm(Model model) {
-        List menus = orderService.menu();
+        List<Drink> menus = orderService.menu();
         System.out.println(menus.get(2));
         model.addAttribute("menus", menus);
         return "orders/orderForm";
