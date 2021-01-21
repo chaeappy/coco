@@ -3,7 +3,12 @@ package com.cafe.coco.controller;
 import com.cafe.coco.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class OrderController {
@@ -19,10 +24,14 @@ public class OrderController {
     }
 
     @GetMapping("/orders/orderForm")
-    public String orderForm() {
-        orderService.menu();
+    public String orderForm(Model model) {
+        List menus = orderService.menu();
+        System.out.println(menus.get(2));
+        model.addAttribute("menus", menus);
         return "orders/orderForm";
     }
+
+
 
     /**
      * 메뉴선택

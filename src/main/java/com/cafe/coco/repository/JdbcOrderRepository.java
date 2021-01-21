@@ -4,11 +4,10 @@ import com.cafe.coco.domain.Drink;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class JdbcOrderRepository implements OrderRepository{
     DataSource dataSourceForDrink = null;
@@ -17,7 +16,7 @@ public class JdbcOrderRepository implements OrderRepository{
     ResultSet resultSet = null;
     String sql = null;
 
-    HashMap<Long, Drink> menu = new HashMap<>();
+    ArrayList<Drink> menus = new ArrayList<Drink>();
     HashMap<Drink, Integer> choices = new HashMap<>();
 
     public JdbcOrderRepository(DataSource dataSourceForDrink) {
@@ -28,7 +27,7 @@ public class JdbcOrderRepository implements OrderRepository{
      * 메뉴저장
      */
     @Override
-    public HashMap menu() {
+    public ArrayList<Drink> menu() {
         sql = "SELECT * FROM drink;";
         // hashMap != null 모두 삭제하고 시작
         cleanHashMap();
@@ -45,7 +44,7 @@ public class JdbcOrderRepository implements OrderRepository{
                 int price = resultSet.getInt(3);
                 Drink drink = new Drink(pk, name, price);
                 if (drink != null) {
-                    menu.put(pk, drink);
+                    menus.add(drink);
                     choices.put(drink, 0);
                 }
             }
@@ -54,7 +53,7 @@ public class JdbcOrderRepository implements OrderRepository{
         } finally {
             close(connection, preparedStatement, resultSet);
         }
-        return menu;
+        return menus;
     }
 
     /**
@@ -62,14 +61,18 @@ public class JdbcOrderRepository implements OrderRepository{
      */
     @Override
     public HashMap input(Long pk) {
-        Drink drink = menu.get(pk);
-        int howMany = choices.get(drink);
-        choices.put(drink, ++howMany);
+//        Drink drink = menus.get(pk);
         return choices;
     }
 
+
     @Override
     public HashMap modifyInput() {
+        return null;
+    }
+
+    @Override
+    public Long total() {
         return null;
     }
 
@@ -77,8 +80,8 @@ public class JdbcOrderRepository implements OrderRepository{
      * 메뉴 HashMap 청소
      */
     private void cleanHashMap() {
-        if (menu != null) {
-            menu.clear();
+        if (menus != null) {
+            menus.clear();
         }
     }
 
