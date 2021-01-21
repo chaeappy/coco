@@ -3,6 +3,14 @@
         ALTER TABLE 테이블명 CHANGE 기존컬럼명 새컬럼명 새컬럼타입;
     }
 
+    컬럼 추가 {
+        ALTER TABLE 테이블명 ADD 컬럼명 컬럼타입 (AFTER 컬럼명);
+    }
+
+    컬럼 데이터 수정 {
+        UPDATE 테이블명 SET 컬럼명 = '입력값' where 컬럼 = 특정값;
+    }
+
     테이블명 변경 {
         RENAME TABLE 테이블명 TO 새테이블명;
     }

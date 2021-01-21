@@ -33,7 +33,7 @@ public class OrderService {
     /**
      * 메뉴수정
      */
-    public HashMap modifyInput() {
+    public HashMap modifyInput(Drink drink, int howMany) {
         return null;
 
     }

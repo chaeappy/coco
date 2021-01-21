@@ -16,7 +16,7 @@ public interface OrderRepository {
     HashMap input(Long pk);
 
     // 메뉴수정
-    HashMap modifyInput();
+    HashMap modifyInput(Drink drink, int howMany);
 
     // 금액확인
     Long total();

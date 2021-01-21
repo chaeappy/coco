@@ -4,11 +4,13 @@ public class Drink {
     Long pk;
     String name;
     int price;
+    String type;
 
-    public Drink(Long pk, String name, int price) {
+    public Drink(Long pk, String name, int price, String type) {
         this.pk = pk;
         this.name = name;
         this.price = price;
+        this.type = type;
     }
 
     public Long getPk() {
@@ -33,6 +35,14 @@ public class Drink {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getKind() {
+        return type;
+    }
+
+    public void setKind(String kind) {
+        this.type = kind;
     }
 
     @Override
