@@ -1,6 +1,7 @@
 package com.cafe.coco.repository;
 
 import com.cafe.coco.domain.Drink;
+import com.cafe.coco.domain.Input;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ public interface OrderRepository {
     List menu();
 
     // 메뉴선택
-    HashMap input(Long pk);
+    ArrayList<Input> selectMenu(Drink drink);
 
     // 메뉴수정
-    HashMap modifyInput(Drink drink, int howMany);
+    ArrayList<Input> modifyMenu(Input input, int howMany);
 
     // 금액확인
     Long total();

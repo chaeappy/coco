@@ -11,10 +11,11 @@
     <meta charset="UTF-8"/>
     <link th:href="@{/img/logo.png}" />
     <link href="/css/orders/orderForm.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="container">
-    <div>
+    <div id="div_left">
     <table>
         <thead>
             <tr>
@@ -25,17 +26,29 @@
         </thead>
         <tbody>
             <tr th:each="drink : ${menus}">
-                <td th:text="${drink.name}"></td>
+                <td th:id="${drink.name}" th:text="${drink.name}"></td>
                 <td th:text="${drink.price}"></td>
                 <td>
-                    <input type="button" value="선택" />
+                    <input type="button" value="선택" onclick="addInput();" />
                 </td>
             </tr>
         </tbody>
     </table>
-
     </div>
+    <div id="div_right">
+        <table>
+
+        </table>
+    </div>
+
 </div> <!-- /container -->
 
 </body>
+<script type="text/javascript">
+    function addInput() {
+        id = $("#${drink.name}").val();
+        alert(id);
+
+    }
+</script>
 </html>

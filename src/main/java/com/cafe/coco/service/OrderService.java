@@ -1,6 +1,7 @@
 package com.cafe.coco.service;
 
 import com.cafe.coco.domain.Drink;
+import com.cafe.coco.domain.Input;
 import com.cafe.coco.repository.OrderRepository;
 
 import java.util.ArrayList;
@@ -25,16 +26,16 @@ public class OrderService {
     /**
      * 메뉴선택
      */
-    public HashMap input(Long pk) {
-        return orderRepository.input(pk);
+    public ArrayList<Input> selectMenu(Drink drink) {
+        return orderRepository.selectMenu(drink);
 
     }
 
     /**
      * 메뉴수정
      */
-    public HashMap modifyInput(Drink drink, int howMany) {
-        return null;
+    public ArrayList<Input> modifyMenu(Input input, int howMany) {
+        return orderRepository.modifyMenu(input, howMany);
 
     }
 

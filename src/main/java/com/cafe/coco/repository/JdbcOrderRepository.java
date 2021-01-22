@@ -1,13 +1,13 @@
 package com.cafe.coco.repository;
 
 import com.cafe.coco.domain.Drink;
+import com.cafe.coco.domain.Input;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class JdbcOrderRepository implements OrderRepository{
     DataSource dataSourceForDrink = null;
@@ -19,7 +19,7 @@ public class JdbcOrderRepository implements OrderRepository{
 
     ArrayList<Drink> menus;
     HashMap<Long, Drink> drinks = new HashMap<>();
-    HashMap<Drink, Integer> choices = new HashMap<>();
+    ArrayList<Input> inputs = new ArrayList<>();
 
     public JdbcOrderRepository(DataSource dataSourceForDrink) {
         this.dataSourceForDrink = dataSourceForDrink;
@@ -62,30 +62,26 @@ public class JdbcOrderRepository implements OrderRepository{
      * 메뉴선택
      */
     @Override
-    public HashMap input(Long pk) {
-        Drink drink = drinks.get(pk);
-        choices.put(drink, null);
-        return choices;
+    public ArrayList<Input> selectMenu(Drink drink) {
+        Long pk = drink.getPk();
+        inputs.add(new Input(drink, 1));
+        return inputs;
     }
 
 
     @Override
-    public HashMap modifyInput(Drink drink, int howMany) {
-        choices.put(drink, howMany);
-        return null;
+    public ArrayList<Input> modifyMenu(Input input, int howMany) {
+        if (inputs.contains(input)) {
+            inputs.remove(input);
+            input.setHowMany(howMany);
+            inputs.add(input);
+        }
+        return inputs;
     }
 
     @Override
     public Long total() {
-        long total = 0;
-        for (Map.Entry<Drink, Integer> entry : choices.entrySet()) {
-            Drink drink = entry.getKey();
-            int howMany = entry.getValue();
-            int price = drink.getPrice();
-            int sum = price * howMany;
-            total += sum;
-        }
-        return total;
+      return null;
     }
 
     /**
