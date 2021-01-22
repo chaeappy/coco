@@ -31,7 +31,6 @@ public class OrderController {
     @GetMapping("/orders/orderForm")
     public String orderForm(Model model) {
         List<Drink> menus = orderService.menu();
-        System.out.println(menus.get(2));
         model.addAttribute("menus", menus);
         return "orders/orderForm";
     }
@@ -51,15 +50,26 @@ public class OrderController {
 
     @ResponseBody
     @PostMapping("/orders/orderForm")
-    public void selectMenu(HttpServletRequest request) {
-        String str = request.getParameter("pk");
+    public String selectMenu(@RequestBody String str) {
         Long pk = Long.valueOf(str);
         ArrayList<Input> inputs = orderService.selectMenu(pk);
         for (int i = 0; i < inputs.size(); i++) {
             System.out.println(inputs.get(i));
         }
-
+        return "0";
     }
+
+//    @ResponseBody
+//    @PostMapping("/orders/orderForm")
+//    public String selectMenu(HttpServletRequest request) {
+//        String str = request.getParameter("pk");
+//        Long pk = Long.valueOf(str);
+//        ArrayList<Input> inputs = orderService.selectMenu(pk);
+//        for (int i = 0; i < inputs.size(); i++) {
+//            System.out.println(inputs.get(i));
+//        }
+//        return "";
+//    }
 
 
 }
