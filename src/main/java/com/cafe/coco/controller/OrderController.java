@@ -51,10 +51,14 @@ public class OrderController {
 
     @ResponseBody
     @PostMapping("/orders/orderForm")
-    public String selectMenu(HttpServletRequest request) {
+    public void selectMenu(HttpServletRequest request) {
         String str = request.getParameter("pk");
-        System.out.println(str);
-        return "orders/inputForm";
+        Long pk = Long.valueOf(str);
+        ArrayList<Input> inputs = orderService.selectMenu(pk);
+        for (int i = 0; i < inputs.size(); i++) {
+            System.out.println(inputs.get(i));
+        }
+
     }
 
 

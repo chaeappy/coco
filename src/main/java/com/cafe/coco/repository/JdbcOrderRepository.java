@@ -32,7 +32,7 @@ public class JdbcOrderRepository implements OrderRepository{
     public ArrayList<Drink> menu() {
         sql = "SELECT * FROM drink;";
         // hashMap != null 모두 삭제하고 시작
-        cleanHashMap();
+        clean();
 
         try {
             connection = getConnection();
@@ -62,8 +62,8 @@ public class JdbcOrderRepository implements OrderRepository{
      * 메뉴선택
      */
     @Override
-    public ArrayList<Input> selectMenu(Drink drink) {
-        Long pk = drink.getPk();
+    public ArrayList<Input> selectMenu(Long pk) {
+        Drink drink = drinks.get(pk);
         inputs.add(new Input(drink, 1));
         return inputs;
     }
@@ -87,9 +87,15 @@ public class JdbcOrderRepository implements OrderRepository{
     /**
      * 메뉴 HashMap 청소
      */
-    private void cleanHashMap() {
+    private void clean() {
         if (menus != null) {
             menus.clear();
+        }
+        if (inputs != null) {
+            inputs.clear();
+        }
+        if (drinks != null) {
+            drinks.clear();
         }
     }
 

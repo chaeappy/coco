@@ -14,7 +14,7 @@ public interface OrderRepository {
     List menu();
 
     // 메뉴선택
-    ArrayList<Input> selectMenu(Drink drink);
+    ArrayList<Input> selectMenu(Long pk);
 
     // 메뉴수정
     ArrayList<Input> modifyMenu(Input input, int howMany);

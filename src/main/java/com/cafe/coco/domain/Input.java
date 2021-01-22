@@ -28,4 +28,10 @@ public class Input {
     public void setHowMany(int howMany) {
         this.howMany = howMany;
     }
+
+    @Override
+    public String toString() {
+        return drink +
+                ", " + howMany;
+    }
 }
