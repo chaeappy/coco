@@ -1,0 +1,29 @@
+<!--
+1 Get맵핑 홈 view
+2 버튼
+    - 뒤로가기
+    - 로그아웃
+    - 홈
+    - 현금 / 카드 선택
+-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/img/logo.png}" />
+    <link href="/css/payments/paymentForm.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="page">
+    <div id="top"></div>
+    <div class="ctr-p" id="two">
+        <img src="/img/logo.png" />
+    </div>
+    <div class="ctr-p" id="bottom">
+        <button class="button" id="logBtn" onclick="location.href='/orders/orderForm'">현금</button>
+        <button class="button" onclick="location.href='/customers/new'">카드</button>
+    </div>
+</div>
+</body>
+</html>
