@@ -1,11 +1,9 @@
 package com.cafe.coco;
 
-import com.cafe.coco.repository.JdbcCustomerRepository;
-import com.cafe.coco.repository.CustomerRepository;
-import com.cafe.coco.repository.JdbcOrderRepository;
-import com.cafe.coco.repository.OrderRepository;
+import com.cafe.coco.repository.*;
 import com.cafe.coco.service.CustomerService;
 import com.cafe.coco.service.OrderService;
+import com.cafe.coco.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +15,13 @@ public class SpringConfig {
 
     private final DataSource dataSource;
     private final DataSource dataSourceForDrink;
+    private final DataSource dataSourceForPayment;
 
     @Autowired
-    public SpringConfig(DataSource dataSource, DataSource dataSourceForDrink) {
+    public SpringConfig(DataSource dataSource, DataSource dataSourceForDrink, DataSource dataSourceForPayment) {
         this.dataSource = dataSource;
         this.dataSourceForDrink = dataSourceForDrink;
+        this.dataSourceForPayment = dataSourceForPayment;
     }
 
     @Bean
@@ -42,6 +42,16 @@ public class SpringConfig {
     @Bean
     public OrderRepository orderRepository() {
         return new JdbcOrderRepository(dataSourceForDrink);
+    }
+
+    @Bean
+    public PaymentService paymentService() {
+        return new PaymentService(paymentRepository());
+    }
+
+    @Bean
+    public PaymentRepository paymentRepository() {
+        return new JdbcPaymentRepository(dataSourceForPayment);
     }
 
 }
