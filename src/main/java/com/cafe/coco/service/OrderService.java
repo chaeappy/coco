@@ -34,8 +34,8 @@ public class OrderService {
     /**
      * 메뉴수정
      */
-    public ArrayList<Input> modifyMenu(Input input, int howMany) {
-        return orderRepository.modifyMenu(input, howMany);
+    public HashMap<String, Object> modifyMenu(Long pk) {
+        return orderRepository.modifyMenu(pk);
 
     }
 

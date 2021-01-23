@@ -15,11 +15,17 @@ public class JdbcOrderRepository implements OrderRepository{
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
     String sql = null;
+    int index = -1;
 
-
-    ArrayList<Drink> menus;
+    // 메뉴 생성을 위한 드링크 기본 목록
     HashMap<Long, Drink> drinks = new HashMap<>();
+    // 메뉴 출력을 위한 단순 리스트
+    ArrayList<Drink> menus;
+    // 맵 sand에 인덱스 넘버와, 수량을 위한 임시 그릇 (list 특정값 호출을 위한 편법)
+    HashMap<Long, Integer> checkInputs = new HashMap<>();
+    // Map_sand의 오브젝트타입 밸류로 담기위한 그릇
     ArrayList<Input> inputs = new ArrayList<>();
+    // 실질적으로 서버에 전송되는 맵
     HashMap<String, Object> send = new HashMap<>();
 
     public JdbcOrderRepository(DataSource dataSourceForDrink) {
@@ -65,21 +71,35 @@ public class JdbcOrderRepository implements OrderRepository{
     @Override
     public HashMap<String, Object> selectMenu(Long pk) {
         Drink drink = drinks.get(pk);
-        inputs.add(new Input(drink.getName(), 1));
-        send.put("inputs", inputs);
+        if (!checkInputs.containsKey(pk)) {
+            ++index;
+            checkInputs.put(pk, index);
+            inputs.add(new Input(drink.getName(), 1));
+        } else {
+            // 수량변경
+            modifyMenu(pk);
+        }
+            send.put("inputs", inputs);
 //        inputs.add(new Input(drink.getName(), 1));
         return send;
     }
 
 
     @Override
-    public ArrayList<Input> modifyMenu(Input input, int howMany) {
+    public HashMap<String, Object> modifyMenu(Long pk) {
+        // index 넘버
+        int value = checkInputs.get(pk);
+        Input input = inputs.get(value);
+        int howMany = input.getHowMany();
+        input.setHowMany(++howMany);
+        inputs.set(value, input);
+        send.put("inputs", inputs);
 //        if (inputs.contains(input)) {
 //            inputs.remove(input);
 //            input.setHowMany(howMany);
 //            inputs.add(input);
 //        }
-        return null;
+        return send;
     }
 
     @Override

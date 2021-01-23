@@ -17,7 +17,7 @@ public interface OrderRepository {
     HashMap<String, Object> selectMenu(Long pk);
 
     // 메뉴수정
-    ArrayList<Input> modifyMenu(Input input, int howMany);
+    HashMap<String, Object> modifyMenu(Long pk);
 
     // 금액확인
     Long total();
