@@ -38,6 +38,7 @@
     </table>
     </div>
     <div id="div_right">
+        <p id="p_total">합계</p>
     </div>
 
 </div> <!-- /container -->
@@ -47,6 +48,7 @@
     function addInput(text) {
         var id = text;
         var list = [];
+        var total = 0;
         var html = "";
         $.ajax({
             type: "POST",
@@ -55,6 +57,8 @@
             data: id,
             success: function(send) {
                 list = send.inputs;
+                total = send.total;
+
                 $.each(list, function(index, value) {
                     html += "<tr>";
                     html += "<td>" + list[index].name + "</td>";
@@ -62,6 +66,10 @@
                     html += "</tr>";
                     ++index;
                 });
+                    html += "<tr>";
+                    html += "<td>" + "합계" + "</td>"
+                    html += "<td>" + total + "</td>";
+                    html += "</tr>";
                     $("#div_right").html(html);
 
             }

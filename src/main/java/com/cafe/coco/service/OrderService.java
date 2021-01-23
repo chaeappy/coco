@@ -39,10 +39,5 @@ public class OrderService {
 
     }
 
-    /**
-     * 토탈 금액확인
-     */
-    public Long total() {
-        return null;
-    }
+
 }

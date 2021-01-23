@@ -55,10 +55,6 @@ public class OrderController {
     public HashMap<String, Object> selectMenu(@RequestBody String str) {
         Long pk = Long.valueOf(str);
         HashMap<String, Object> send = orderService.selectMenu(pk);
-
-//        for (int i = 0; i < inputs.size(); i++) {
-//            System.out.println(inputs.get(i));
-//        }
         return send;
     }
 

@@ -5,12 +5,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Input {
+    Long pk;
     String name;
+    int price;
     int howMany;
+    int total;
 
-    public Input(String name, int howMany) {
+    public Input(Long pk, String name, int price, int howMany) {
+        this.pk = pk;
         this.name = name;
+        this.price = price;
         this.howMany = howMany;
+        this.total = price * howMany;
+    }
+
+    public Long getPk() {
+        return pk;
+    }
+
+    public void setPk(Long pk) {
+        this.pk = pk;
     }
 
     public String getName() {
@@ -27,6 +41,14 @@ public class Input {
 
     public void setHowMany(int howMany) {
         this.howMany = howMany;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     @Override

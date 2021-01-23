@@ -74,13 +74,15 @@ public class JdbcOrderRepository implements OrderRepository{
         if (!checkInputs.containsKey(pk)) {
             ++index;
             checkInputs.put(pk, index);
-            inputs.add(new Input(drink.getName(), 1));
+            inputs.add(new Input(pk, drink.getName(), drink.getPrice(), 1));
         } else {
             // 수량변경
             modifyMenu(pk);
         }
+            int total = total();
             send.put("inputs", inputs);
-//        inputs.add(new Input(drink.getName(), 1));
+            send.put("total", total);
+
         return send;
     }
 
@@ -93,7 +95,9 @@ public class JdbcOrderRepository implements OrderRepository{
         int howMany = input.getHowMany();
         input.setHowMany(++howMany);
         inputs.set(value, input);
+        int total = total();
         send.put("inputs", inputs);
+        send.put("total", total);
 //        if (inputs.contains(input)) {
 //            inputs.remove(input);
 //            input.setHowMany(howMany);
@@ -103,8 +107,13 @@ public class JdbcOrderRepository implements OrderRepository{
     }
 
     @Override
-    public Long total() {
-      return null;
+    public int total() {
+        int sum = 0;
+        for (int i = 0; i < inputs.size(); i++) {
+            Input input = inputs.get(i);
+            sum += input.getTotal();
+        }
+      return sum;
     }
 
     /**
@@ -119,6 +128,12 @@ public class JdbcOrderRepository implements OrderRepository{
         }
         if (drinks != null) {
             drinks.clear();
+        }
+        if (checkInputs != null) {
+            checkInputs.clear();
+        }
+        if (send != null) {
+            send.clear();
         }
     }
 
