@@ -20,6 +20,7 @@ public class JdbcOrderRepository implements OrderRepository{
     ArrayList<Drink> menus;
     HashMap<Long, Drink> drinks = new HashMap<>();
     ArrayList<Input> inputs = new ArrayList<>();
+    HashMap<String, Object> send = new HashMap<>();
 
     public JdbcOrderRepository(DataSource dataSourceForDrink) {
         this.dataSourceForDrink = dataSourceForDrink;
@@ -62,21 +63,23 @@ public class JdbcOrderRepository implements OrderRepository{
      * 메뉴선택
      */
     @Override
-    public ArrayList<Input> selectMenu(Long pk) {
+    public HashMap<String, Object> selectMenu(Long pk) {
         Drink drink = drinks.get(pk);
-        inputs.add(new Input(drink, 1));
-        return inputs;
+        inputs.add(new Input(drink.getName(), 1));
+        send.put("inputs", inputs);
+//        inputs.add(new Input(drink.getName(), 1));
+        return send;
     }
 
 
     @Override
     public ArrayList<Input> modifyMenu(Input input, int howMany) {
-        if (inputs.contains(input)) {
-            inputs.remove(input);
-            input.setHowMany(howMany);
-            inputs.add(input);
-        }
-        return inputs;
+//        if (inputs.contains(input)) {
+//            inputs.remove(input);
+//            input.setHowMany(howMany);
+//            inputs.add(input);
+//        }
+        return null;
     }
 
     @Override

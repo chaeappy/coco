@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class OrderController {
@@ -50,14 +52,14 @@ public class OrderController {
 
     @ResponseBody
     @PostMapping("/orders/orderForm")
-    public ArrayList<Input> selectMenu(@RequestBody String str) {
+    public HashMap<String, Object> selectMenu(@RequestBody String str) {
         Long pk = Long.valueOf(str);
-        ArrayList<Input> inputs = orderService.selectMenu(pk);
-        System.out.println(inputs.size());
+        HashMap<String, Object> send = orderService.selectMenu(pk);
+
 //        for (int i = 0; i < inputs.size(); i++) {
 //            System.out.println(inputs.get(i));
 //        }
-        return inputs;
+        return send;
     }
 
 //    @ResponseBody

@@ -26,7 +26,7 @@ public class OrderService {
     /**
      * 메뉴선택
      */
-    public ArrayList<Input> selectMenu(Long pk) {
+    public HashMap<String, Object> selectMenu(Long pk) {
         return orderRepository.selectMenu(pk);
 
     }

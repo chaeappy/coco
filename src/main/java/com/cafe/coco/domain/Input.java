@@ -5,20 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Input {
-    Drink drink;
+    String name;
     int howMany;
 
-    public Input(Drink drink, int howMany) {
-        this.drink = drink;
+    public Input(String name, int howMany) {
+        this.name = name;
         this.howMany = howMany;
     }
 
-    public Drink getDrink() {
-        return drink;
+    public String getName() {
+        return name;
     }
 
-    public void setDrink(Drink drink) {
-        this.drink = drink;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getHowMany() {
@@ -31,7 +31,7 @@ public class Input {
 
     @Override
     public String toString() {
-        return drink +
+        return name +
                 ", " + howMany;
     }
 }
