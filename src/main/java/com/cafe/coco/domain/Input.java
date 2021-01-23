@@ -41,6 +41,7 @@ public class Input {
 
     public void setHowMany(int howMany) {
         this.howMany = howMany;
+        this.total = howMany * price;
     }
 
     public int getTotal() {
