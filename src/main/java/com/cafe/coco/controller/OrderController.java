@@ -50,13 +50,14 @@ public class OrderController {
 
     @ResponseBody
     @PostMapping("/orders/orderForm")
-    public String selectMenu(@RequestBody String str) {
+    public ArrayList<Input> selectMenu(@RequestBody String str) {
         Long pk = Long.valueOf(str);
         ArrayList<Input> inputs = orderService.selectMenu(pk);
-        for (int i = 0; i < inputs.size(); i++) {
-            System.out.println(inputs.get(i));
-        }
-        return "0";
+        System.out.println(inputs.size());
+//        for (int i = 0; i < inputs.size(); i++) {
+//            System.out.println(inputs.get(i));
+//        }
+        return inputs;
     }
 
 //    @ResponseBody
