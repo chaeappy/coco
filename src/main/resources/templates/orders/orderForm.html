@@ -38,9 +38,6 @@
     </table>
     </div>
     <div id="div_right">
-        <table>
-
-        </table>
     </div>
 
 </div> <!-- /container -->
@@ -57,21 +54,18 @@
             contentType: "text/plain; charset=utf-8;",
             type: "POST",
             success: function(data) {
-            
-                if (data != 0){
-                    alert(data);
+                      $("#div_right").html(data);
+                      alert("응!");
+
 <!--                    $.ajax({-->
-<!--                        url: "/orders/inputForm.html",-->
+<!--                        url: "/orders/inputForm",-->
 <!--                        dataType: "html",-->
 <!--                        type: "post",-->
 <!--                        data: data,-->
 <!--                        success: function(result) {-->
-<!--                            $("#div_right").html(result);-->
+<!--                            -->
 <!--                        }-->
 <!--                    });-->
-                } else {
-                    alert(" 실패");
-                }
             }
         });
     }
