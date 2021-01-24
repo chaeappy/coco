@@ -13,9 +13,9 @@ package com.cafe.coco.domain;
  */
 
 public class Input {
-    public Drink drink;
-    public int howMany;
-    public int total;
+    Drink drink;
+    int howMany;
+    int total;
 
     public Input(Drink drink, int howMany) {
         this.drink = drink;
