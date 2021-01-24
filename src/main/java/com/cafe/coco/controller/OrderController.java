@@ -47,7 +47,6 @@ public class OrderController {
 //    public String selectMenu(@RequestBody ArrayList<Input> inputs, Model model) {
 //        model.addAttribute("inputs", inputs);
 //        return"orders/orderForm";
-//
 //    }
 
     @ResponseBody
