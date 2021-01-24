@@ -2,6 +2,7 @@ package com.cafe.coco.service;
 
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Input;
+import com.cafe.coco.domain.Order;
 import com.cafe.coco.repository.OrderRepository;
 
 import java.util.ArrayList;
@@ -39,5 +40,11 @@ public class OrderService {
 
     }
 
+    /**
+     * 주문목록 생성
+     */
+    public Order createOrder() {
+        return orderRepository.createOrder();
+    }
 
 }

@@ -12,6 +12,9 @@ public class PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
+    /**
+     * 주문완료 후 디비저장
+     */
     public void save(Payment payment) {
         paymentRepository.save(payment);
         if (payment.isReceipt()) {
@@ -20,6 +23,14 @@ public class PaymentService {
             printReceipt();
         }
     }
+
+    /**
+     * 영수증 발행
+     */
     public void printReceipt() {}
+
+    /**
+     * 결재취소
+     */
     public void cancelPayment(){}
 }

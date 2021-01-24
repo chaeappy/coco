@@ -3,6 +3,7 @@ package com.cafe.coco.controller;
 import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Input;
+import com.cafe.coco.domain.Order;
 import com.cafe.coco.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SessionAttributes("order")
 @Controller
 public class OrderController {
     OrderService orderService;
@@ -57,6 +60,14 @@ public class OrderController {
         Long pk = Long.valueOf(str);
         HashMap<String, Object> send = orderService.selectMenu(pk);
         return send;
+    }
+
+    @GetMapping("/payments")
+    public String createOrder(HttpSession httpSession) {
+        Order order = orderService.createOrder();
+        httpSession.setAttribute("order", order);
+        System.out.println(order);
+        return "payments/paymentHome";
     }
 
 

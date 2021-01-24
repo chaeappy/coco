@@ -44,4 +44,14 @@ public class Order {
         }
         this.total = sum;
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (int i = 0; i < inputs.size(); i++) {
+            str += inputs.get(i) + "\n";
+        }
+        str += "Total : " + total + "원";
+        return str;
+    }
 }

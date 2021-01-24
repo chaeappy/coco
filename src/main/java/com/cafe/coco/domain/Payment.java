@@ -11,29 +11,29 @@ package com.cafe.coco.domain;
  * 7. receipt - 영수증 발행 여부
  */
 public class Payment {
-    Long order_pk;
+    Long pk;
     String date;
-    String id;
+    Customer customer;
     String way;
-    int total;
+    Order order;
     String cash_receipt;
     boolean receipt;
 
-    public Payment(String date, String id, String way, int total, String cash_receipt, boolean receipt) {
+    public Payment(String date, Customer customer, String way, Order order, String cash_receipt, boolean receipt) {
         this.date = date;
-        this.id = id;
+        this.customer = customer;
         this.way = way;
-        this.total = total;
+        this.order = order;
         this.cash_receipt = cash_receipt;
         this.receipt = receipt;
     }
 
-    public Long getOrder_pk() {
-        return order_pk;
+    public Long getPk() {
+        return pk;
     }
 
-    public void setOrder_pk(Long order_pk) {
-        this.order_pk = order_pk;
+    public void setPk(Long pk) {
+        this.pk = pk;
     }
 
     public String getDate() {
@@ -44,12 +44,12 @@ public class Payment {
         this.date = date;
     }
 
-    public String getId() {
-        return id;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getWay() {
@@ -61,26 +61,26 @@ public class Payment {
     }
 
     public int getTotal() {
-        return total;
+        return this.order.getTotal();
     }
 
-    public void setTotal(int total) {
-        this.total = total;
-    }
+//    public void setTotal(int total) {
+//        this.total = total;
+//    }
 
-    public String getCash_receipt() {
-        return cash_receipt;
-    }
+//    public String getCash_receipt() {
+//        return cash_receipt;
+//    }
 
-    public void setCash_receipt(String cash_receipt) {
-        this.cash_receipt = cash_receipt;
-    }
+//    public void setCash_receipt(String cash_receipt) {
+//        this.cash_receipt = cash_receipt;
+//    }
 
     public boolean isReceipt() {
         return receipt;
     }
 
-    public void setReceipt(boolean receipt) {
-        this.receipt = receipt;
-    }
+//    public void setReceipt(boolean receipt) {
+//        this.receipt = receipt;
+//    }
 }

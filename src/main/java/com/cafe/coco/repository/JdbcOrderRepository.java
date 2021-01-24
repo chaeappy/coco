@@ -2,6 +2,7 @@ package com.cafe.coco.repository;
 
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Input;
+import com.cafe.coco.domain.Order;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
@@ -114,6 +115,13 @@ public class JdbcOrderRepository implements OrderRepository{
         }
       return sum;
     }
+
+    @Override
+    public Order createOrder() {
+
+        return new Order(inputs);
+    }
+
 
     /**
      * 메뉴 HashMap 청소

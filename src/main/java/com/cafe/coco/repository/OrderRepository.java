@@ -2,6 +2,7 @@ package com.cafe.coco.repository;
 
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Input;
+import com.cafe.coco.domain.Order;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ public interface OrderRepository {
 
     // 금액확인
     int total();
+
+    // 주문목록 생성
+    Order createOrder();
 
 
 
