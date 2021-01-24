@@ -1,5 +1,6 @@
 package com.cafe.coco.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -7,17 +8,40 @@ import java.util.HashMap;
  *
  */
 public class Order {
-    HashMap<Long, Input> order;
+    private Long pk;
+    private ArrayList<Input> inputs;
+    private int total;
 
-    public Order(HashMap<Long, Input> order) {
-        this.order = order;
+    public Order(ArrayList<Input> inputs) {
+        this.inputs = inputs;
+        setTotal();
     }
 
-    public HashMap<Long, Input> getOrder() {
-        return order;
+    public Long getPk() {
+        return pk;
     }
 
-    public void setOrder(HashMap<Long, Input> order) {
-        this.order = order;
+//    public void setPk(Long pk) {
+//        this.pk = pk;
+//    }
+
+    public ArrayList<Input> getInputs() {
+        return inputs;
+    }
+
+//    public void setInputs(ArrayList<Input> inputs) {
+//        this.inputs = inputs;
+//    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal() {
+        int sum = 0;
+        for (int i = 0; i < this.inputs.size(); i++) {
+            sum += this.inputs.get(i).getTotal();
+        }
+        this.total = sum;
     }
 }

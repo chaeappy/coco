@@ -11,7 +11,7 @@ package com.cafe.coco.domain;
  * 7. receipt - 영수증 발행 여부
  */
 public class Payment {
-    Long pk;
+    Long order_pk;
     String date;
     String id;
     String way;
@@ -28,12 +28,12 @@ public class Payment {
         this.receipt = receipt;
     }
 
-    public Long getPk() {
-        return pk;
+    public Long getOrder_pk() {
+        return order_pk;
     }
 
-    public void setPk(Long pk) {
-        this.pk = pk;
+    public void setOrder_pk(Long order_pk) {
+        this.order_pk = order_pk;
     }
 
     public String getDate() {

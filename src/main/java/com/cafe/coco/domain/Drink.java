@@ -9,10 +9,10 @@ package com.cafe.coco.domain;
  * :: 시스템 동작시 db에서 음료정보 받아와 드링크 객체화하기. 이후 ArrayList_menu 에 담는다.
  */
 public class Drink {
-    Long pk;
-    String name;
-    int price;
-    String type;
+    private Long pk;
+    private String name;
+    private int price;
+    private String type;
 
     public Drink(Long pk, String name, int price, String type) {
         this.pk = pk;
