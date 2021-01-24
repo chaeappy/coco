@@ -1,5 +1,6 @@
 package com.cafe.coco.controller;
 
+import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Input;
 import com.cafe.coco.service.OrderService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
@@ -56,6 +58,8 @@ public class OrderController {
         HashMap<String, Object> send = orderService.selectMenu(pk);
         return send;
     }
+
+
 
 //    @ResponseBody
 //    @PostMapping("/orders/orderForm")

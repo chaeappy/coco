@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.List;
 
+@SessionAttributes("customer")
 @Controller
 public class CustomerController {
 
@@ -76,13 +78,12 @@ public class CustomerController {
     }
 
     @ResponseBody
-    @PostMapping("/customers/login")
-    public String login(@RequestBody String info) throws ParseException {
+    @RequestMapping("/customers/login")
+    public String login(@RequestBody String info, HttpSession httpSession) throws ParseException {
         String[] strArr = info.split(",");
-        System.out.println(strArr[0]);
-        System.out.println(strArr[1]);
         Customer customer = customerService.findOne(strArr[0], strArr[1]);
         if (customer != null) {
+            httpSession.setAttribute("customer", customer);
             return "0";
         } else {
             System.out.println("로그인 실패");
