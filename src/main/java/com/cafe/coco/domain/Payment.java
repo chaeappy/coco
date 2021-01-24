@@ -1,5 +1,15 @@
 package com.cafe.coco.domain;
 
+/**
+ * :: Payment class
+ * 1. pk - 매출넘버 ( order넘버와 동일 해야함 )
+ * 2. data - 매출 생성시간
+ * 3. id - 커스토머 아이디
+ * 4. way - 현금 또는 카드
+ * 5. total - 주문 총 금액 ( order 객체 total과 동일할 것 )
+ * 6. cash_receipt - 고객 핸드폰번호 for ( 현금영수증 )
+ * 7. receipt - 영수증 발행 여부
+ */
 public class Payment {
     Long pk;
     String date;

@@ -1,5 +1,12 @@
 package com.cafe.coco.domain;
 
+/**
+ * 고객정보
+ * 1. pk - increment 넘버, 프라이머리 키
+ * 2. id - 고객 아이디, 유니크 키
+ * 3. password - 비밀번호
+ *
+ */
 public class Customer {
     Long pk;
     String id;

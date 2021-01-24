@@ -2,6 +2,14 @@ package com.cafe.coco.domain;
 
 import java.util.HashMap;
 
+/**
+ * :: Receipt class
+ * 1. payment_pk - pk 넘버 ( payment foreign key)
+ * 2. payment_way - 현금 또는 카드
+ * 3. payment_cashReceipt - 현금영수증 번호
+ * 4. send - HashMap
+ * 5. payment_total
+ */
 public class Receipt {
     Long payment_pk;
     String payment_date;

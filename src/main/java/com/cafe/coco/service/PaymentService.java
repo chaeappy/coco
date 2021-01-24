@@ -2,6 +2,7 @@ package com.cafe.coco.service;
 
 import com.cafe.coco.domain.Payment;
 import com.cafe.coco.domain.Receipt;
+import com.cafe.coco.repository.OrderRepository;
 import com.cafe.coco.repository.PaymentRepository;
 
 public class PaymentService {

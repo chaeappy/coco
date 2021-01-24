@@ -1,39 +1,35 @@
 package com.cafe.coco.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+/**
+ * :: 입력 또는 선택 클래스
+ * 1. pk - 음료넘버
+ * 2. name - 음료명
+ * 3. price - 음료가격
+ * 4. howMany - 수량
+ * 5. total - 음료 * 수량 = 가격 ( ** 해당 주문의 토탈금액 아님 )
+ *
+ * 고객이 선택한 한가지 종류의 음료와 수량을 객체화한다 for ( order클래스 요소로 들어감 )
+ * ㄴ Receipt 객체 생성시 필요한 ( 요소 담고있음 )
+ */
 
 public class Input {
-    Long pk;
-    String name;
-    int price;
-    int howMany;
-    int total;
+    public Drink drink;
+    public int howMany;
+    public int total;
 
-    public Input(Long pk, String name, int price, int howMany) {
-        this.pk = pk;
-        this.name = name;
-        this.price = price;
+    public Input(Drink drink, int howMany) {
+        this.drink = drink;
         this.howMany = howMany;
-        this.total = price * howMany;
+        this.total = drink.getPrice() * howMany;
     }
 
-    public Long getPk() {
-        return pk;
+    public Drink getDrink() {
+        return drink;
     }
 
-    public void setPk(Long pk) {
-        this.pk = pk;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setDrink(Drink drink) {
+//        this.drink = drink;
+//    }
 
     public int getHowMany() {
         return howMany;
@@ -41,20 +37,20 @@ public class Input {
 
     public void setHowMany(int howMany) {
         this.howMany = howMany;
-        this.total = howMany * price;
+        setTotal(howMany);
     }
 
     public int getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setTotal(int howMany) {
+        this.total = (this.drink.getPrice()) * howMany;
     }
 
     @Override
     public String toString() {
-        return name +
+        return this.drink.getName() +
                 ", " + howMany;
     }
 }

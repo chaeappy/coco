@@ -27,6 +27,7 @@
 
     auto_increment 추가 {
         ALTER TABLE auto_test MODIFY id INT NOT NULL AUTO_INCREMENT;
+        ALTER TABLE cafe.drink MODIFY COLUMN pk bigint(20) auto_increment NOT NULL;
     } --> 데이터 안에 값이 없어야 추가 가능(0, 1, 2...등 있을 경우 중복되므로 x)
 
     auto_increment 초기화 {

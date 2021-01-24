@@ -74,7 +74,7 @@ public class JdbcOrderRepository implements OrderRepository{
         if (!checkInputs.containsKey(pk)) {
             ++index;
             checkInputs.put(pk, index);
-            inputs.add(new Input(pk, drink.getName(), drink.getPrice(), 1));
+            inputs.add(new Input(drink, 1));
         } else {
             // 수량변경
             modifyMenu(pk);
