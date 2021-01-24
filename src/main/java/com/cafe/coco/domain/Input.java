@@ -37,15 +37,20 @@ public class Input {
 
     public void setHowMany(int howMany) {
         this.howMany = howMany;
-        setTotal(howMany);
+        setTotal();
+    }
+
+    public void addHowMany() {
+        this.howMany = ++this.howMany;
+        setTotal();
     }
 
     public int getTotal() {
         return total;
     }
 
-    public void setTotal(int howMany) {
-        this.total = (this.drink.getPrice()) * howMany;
+    public void setTotal() {
+        this.total = (this.drink.getPrice()) * this.howMany;
     }
 
     @Override

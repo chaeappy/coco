@@ -90,11 +90,10 @@ public class JdbcOrderRepository implements OrderRepository{
     @Override
     public HashMap<String, Object> modifyMenu(Long pk) {
         // index 넘버
-        int value = checkInputs.get(pk);
-        Input input = inputs.get(value);
-        int howMany = input.getHowMany();
-        input.setHowMany(++howMany);
-        inputs.set(value, input);
+        int index = checkInputs.get(pk);
+        Input input = inputs.get(index);
+        input.addHowMany();
+        inputs.set(index, input);
         int total = total();
         send.put("inputs", inputs);
         send.put("total", total);
