@@ -92,12 +92,6 @@ public class CustomerController {
         }
     }
 
-    @RequestMapping("customers/logout")
-    public String logout(HttpSession httpSession ) {
-        httpSession.invalidate();
-        return "";
-    }
-
     @GetMapping("/customers")
     public String list(Model model) {
         List<Customer> customers = customerService.findCustomers();
