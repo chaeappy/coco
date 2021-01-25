@@ -28,10 +28,17 @@ public class JdbcPaymentRepository implements PaymentRepository {
             preparedStatement.setString(2, payment.getCustomer().getId());
             preparedStatement.setString(3, payment.getPayment_way());
             preparedStatement.setInt(4, payment.getTotal());
-            preparedStatement.setString(5, payment.get);
+            preparedStatement.setString(5, payment.getCash_receipt());
+            preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
 
+            if (resultSet.next()) {
+                System.out.println("Payment 저장완료");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
         }
 
     }

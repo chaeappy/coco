@@ -65,16 +65,14 @@ public class Payment {
 //        this.total = total;
 //    }
 
-//    public String getCash_receipt() {
-//        return cash_receipt;
-//    }
 
-//    public void setCash_receipt(String cash_receipt) {
-//        this.cash_receipt = cash_receipt;
-//    }
+    public String getCash_receipt() {
+        return cash_receipt;
+    }
+
+    public void setCash_receipt(String cash_receipt) {
+        this.cash_receipt = cash_receipt;
+    }
 
 
-//    public void setReceipt(boolean receipt) {
-//        this.receipt = receipt;
-//    }
 }
