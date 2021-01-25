@@ -37,7 +37,8 @@ public class JdbcPaymentRepository implements PaymentRepository {
             resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
-                System.out.println("Payment 저장완료");
+                Long payment_pk = resultSet.getLong(1);
+                payment.setPk(payment_pk);
                 saveOrder(payment);
                 close(connection, preparedStatement, resultSet);
             }
@@ -49,7 +50,7 @@ public class JdbcPaymentRepository implements PaymentRepository {
     }
 
     public void saveOrder(Payment payment) {
-        sql = "INSERT INTO orders(drink_pk, drink_name, ea, total) VALUES (?, ?, ?, ?);";
+        sql = "INSERT INTO orders(payment_pk, drink_pk, drink_name, ea, total) VALUES (?, ?, ?, ?, ?);";
         Order order = payment.getOrder();
         ArrayList<Input> inputs = order.getInputs();
         try {
@@ -58,15 +59,15 @@ public class JdbcPaymentRepository implements PaymentRepository {
             for (int i = 0; i < inputs.size(); i++) {
                 Input input = inputs.get(i);
                 Drink drink = input.getDrink();
-                preparedStatement.setLong(1, drink.getPk());
-                preparedStatement.setString(2, drink.getName());
-                preparedStatement.setInt(3, input.getHowMany());
-                preparedStatement.setInt(4, input.getTotal());
-                preparedStatement.executeUpdate();
-                resultSet = preparedStatement.getGeneratedKeys();
+                preparedStatement.setLong(1, payment.getPk());
+                preparedStatement.setLong(2, drink.getPk());
+                preparedStatement.setString(3, drink.getName());
+                preparedStatement.setInt(4, input.getHowMany());
+                preparedStatement.setInt(5, input.getTotal());
+                int success = preparedStatement.executeUpdate();
 
-                if (resultSet.next()) {
-                    System.out.println("pk : " + resultSet.getLong(1));
+                if (success != 0) {
+                    System.out.println("성공");
                 } else {
                     System.out.println("오류");
                 }
