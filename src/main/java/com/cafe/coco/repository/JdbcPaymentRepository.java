@@ -5,10 +5,7 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class JdbcPaymentRepository implements PaymentRepository {
     private final DataSource dataSourceForPayment;
@@ -23,10 +20,16 @@ public class JdbcPaymentRepository implements PaymentRepository {
 
     @Override
     public void save(Payment payment) {
-        sql = "INSERT INTO payment(payment_date, customer_id, way, total, cash_receipt) VALUES (?, ?, ?, ?, ?);";
+        sql = "INSERT INTO payment(payment_date, customer_id, payment_way, total, cash_receipt) VALUES (?, ?, ?, ?, ?);";
         try {
             connection = getConnection();
-            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, payment.getDate());
+            preparedStatement.setString(2, payment.getCustomer().getId());
+            preparedStatement.setString(3, payment.getPayment_way());
+            preparedStatement.setInt(4, payment.getTotal());
+            preparedStatement.setString(5, payment.get);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,6 +43,11 @@ public class JdbcPaymentRepository implements PaymentRepository {
 
     @Override
     public void cancelPayment() {
+
+    }
+
+    @Override
+    public void logout() {
 
     }
 

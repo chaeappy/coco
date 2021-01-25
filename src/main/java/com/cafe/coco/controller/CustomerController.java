@@ -84,25 +84,19 @@ public class CustomerController {
         Customer customer = customerService.findOne(strArr[0], strArr[1]);
         if (customer != null) {
             httpSession.setAttribute("customer", customer);
+            System.out.println(customer);
             return "0";
         } else {
             System.out.println("로그인 실패");
             return "-1";
         }
     }
-//    @PostMapping("customers/login")
-//    public String login(CustomerForm customerForm) {
-//        id = customerForm.getId();
-//        password = customerForm.getPassword();
-//        Customer customer = customerService.findOne(id, password);
-//        System.out.println(customer);
-//        if (customer != null) {
-//            return "orders/orderForm";
-//        } else {
-//            System.out.println("로그인 실패");
-//            return "redirect:/customers/login";
-//        }
-//    }
+
+    @RequestMapping("customers/logout")
+    public String logout(HttpSession httpSession ) {
+        httpSession.invalidate();
+        return "";
+    }
 
     @GetMapping("/customers")
     public String list(Model model) {

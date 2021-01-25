@@ -6,5 +6,6 @@ public interface PaymentRepository {
     public void save(Payment payment);
     public void printReceipt();
     public void cancelPayment();
+    public void logout();
 
 }

@@ -66,7 +66,6 @@ public class OrderController {
     public String createOrder(HttpSession httpSession) {
         Order order = orderService.createOrder();
         httpSession.setAttribute("order", order);
-        System.out.println(order);
         return "payments/paymentHome";
     }
 
