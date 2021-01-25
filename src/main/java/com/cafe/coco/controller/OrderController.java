@@ -15,10 +15,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @SessionAttributes("order")
 @Controller
@@ -66,6 +63,12 @@ public class OrderController {
     public String createOrder(HttpSession httpSession) {
         Order order = orderService.createOrder();
         httpSession.setAttribute("order", order);
+        Enumeration<String> enum_session = httpSession.getAttributeNames();
+//        while(enum_session.hasMoreElements()) {
+//            String key = enum_session.nextElement();
+//            Object val = httpSession.getAttribute(key);
+//            System.out.println("key : " + key + ", " + val);
+//        }
         return "payments/paymentHome";
     }
 
