@@ -17,11 +17,7 @@ public class PaymentService {
      */
     public void save(Payment payment) {
         paymentRepository.save(payment);
-        if (payment.isReceipt()) {
-//            (Long payment_pk, String payment_date, String getPayment_way,
-//                    String cashReceipt, HashMap<String, Object> send, int payment_total)
-            printReceipt();
-        }
+
     }
 
     /**

@@ -57,6 +57,14 @@ public class Payment {
         this.payment_way = payment_way;
     }
 
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
     public int getTotal() {
         return this.order.getTotal();
     }

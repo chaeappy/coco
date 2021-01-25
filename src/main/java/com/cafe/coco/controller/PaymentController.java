@@ -42,11 +42,16 @@ public class PaymentController {
     @RequestMapping("/payments/cash")
     public String cashForm(@SessionAttribute("customer") Customer customer,
                            @SessionAttribute("order") Order order,
-                           String cash_receipt, boolean receipt) {
-        String date = nowDate();
-        Payment payment = new Payment(date, customer, "현금", order, cash_receipt);
-        paymentService.save(payment);
-        return "";
+                           @RequestBody String test) {
+        if (test != null) {
+            String date = nowDate();
+            String cash_receipt = "010";
+            Payment payment = new Payment(date, customer, "현금", order, cash_receipt);
+            paymentService.save(payment);
+            return "0";
+        } else {
+            return "-1";
+        }
 
     }
 //    @ResponseBody

@@ -1,11 +1,15 @@
 package com.cafe.coco.repository;
 
+import com.cafe.coco.domain.Drink;
+import com.cafe.coco.domain.Input;
+import com.cafe.coco.domain.Order;
 import com.cafe.coco.domain.Payment;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class JdbcPaymentRepository implements PaymentRepository {
     private final DataSource dataSourceForPayment;
@@ -34,13 +38,46 @@ public class JdbcPaymentRepository implements PaymentRepository {
 
             if (resultSet.next()) {
                 System.out.println("Payment 저장완료");
+                saveOrder(payment);
+                close(connection, preparedStatement, resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             close(connection, preparedStatement, resultSet);
         }
+    }
 
+    public void saveOrder(Payment payment) {
+        sql = "INSERT INTO orders(drink_pk, drink_name, ea, total) VALUES (?, ?, ?, ?);";
+        Order order = payment.getOrder();
+        ArrayList<Input> inputs = order.getInputs();
+        try {
+            connection = getConnection();
+                preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            for (int i = 0; i < inputs.size(); i++) {
+                Input input = inputs.get(i);
+                Drink drink = input.getDrink();
+                preparedStatement.setLong(1, drink.getPk());
+                preparedStatement.setString(2, drink.getName());
+                preparedStatement.setInt(3, input.getHowMany());
+                preparedStatement.setInt(4, input.getTotal());
+                preparedStatement.executeUpdate();
+                resultSet = preparedStatement.getGeneratedKeys();
+
+                if (resultSet.next()) {
+                    System.out.println("pk : " + resultSet.getLong(1));
+                } else {
+                    System.out.println("오류");
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
     }
 
     @Override

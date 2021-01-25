@@ -45,12 +45,32 @@
             </div>
         </div>
         <div class="ctr-p" id="three">
-            <button type="button" class="button" id="joinBtn" onclick="location.href='/payments/cash'">완료</button>
+            <button type="button" class="button" id="joinBtn" onclick="pay();">완료</button>
         </div>
     </div>
 </div>
 </body>
 <script type="text/javascript">
+    function pay() {
+        data = "send";
+        alert(data);
+        $.ajax({
+            url: "/payments/cash",
+            data: data,
+            dataType: "text",
+            contentType: "text/plain; charset=utf-8;",
+            type: "POST",
+            success: function(result) {
+                if (result == 0){
+                    alert("성공");
+                } else {
+                    alert("로그인 실패");
+
+                }
+            }
+        });
+
+    }
 
 
 </script>

@@ -7,6 +7,10 @@
         ALTER TABLE 테이블명 ADD 컬럼명 컬럼타입 (AFTER 컬럼명);
     }
 
+    컬럼 삭제 {
+        ALTER TABLE 테이블명 DROP COLUMN 컬럼명;
+    }
+
     컬럼 데이터 수정 {
         UPDATE 테이블명 SET 컬럼명 = '입력값' where 컬럼 = 특정값;
     }
@@ -34,6 +38,9 @@
         ALTER TABLE 테이블명 AUTO_INCREMENT = ?;
     } --> ? 시작할 값
 
+    테이블 내 데이터 삭제 {
+
+    }
 
 
 CREATE TABLE `customer` (
