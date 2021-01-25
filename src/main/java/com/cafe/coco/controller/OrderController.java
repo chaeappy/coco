@@ -57,11 +57,15 @@ public class OrderController {
 
     @GetMapping("/payments")
     public String createOrder(HttpSession httpSession) {
+        /*
+        order 미저장 상태 -> payment db저장 후 진행하므로 객체만 생성한다.
+        order 객체생성을 위한 inputs맵이 Repository에 있으므로 Repo 클래스 내 메서드를 이용하여 생성하고 리턴해줌
+         */
         Order order = orderService.createOrder();
         httpSession.setAttribute("order", order);
-        Enumeration<String> enum_session = httpSession.getAttributeNames();
 
 //        :: HttpSeesion 내 전체 데이터 출력
+//        Enumeration<String> enum_session = httpSession.getAttributeNames();
 //        while(enum_session.hasMoreElements()) {
 //            String key = enum_session.nextElement();
 //            Object val = httpSession.getAttribute(key);

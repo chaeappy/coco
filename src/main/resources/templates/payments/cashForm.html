@@ -36,16 +36,16 @@
         <div class="ctr-p" id="solid">
             <div id="id"></div>
             <div id="inputId">
-                <button type="button" class="button" id="idCheckBtn" onclick="">현금영수증</button>
-                <input type="text" id="inputIdText" name="id" placeholder="버튼을 누르면 활성화 됩니다."/>
+                <input type="checkbox" id="checkbox_cash_receipt" onclick="check_box(this.checked);">현금영수증</input>
+                <input type="text" id="input_cash_receipt" name="id" placeholder="체크박스 누르면 활성화 됩니다." disabled="disabled"/>
             </div>
             <div id="pw"></div>
             <div id="inputPw">
-                <button type="button" class="button" id="receiptBtn">영수증</button>
+                <input type="checkbox" class="button" id="receiptBtn">영수증</input>
             </div>
         </div>
         <div class="ctr-p" id="three">
-            <button type="button" class="button" id="joinBtn" onclick="pay();">완료</button>
+            <button type="button" class="button" id="paymentBtn" onclick="pay();">완료</button>
         </div>
     </div>
 </div>
@@ -71,6 +71,17 @@
         });
 
     }
+
+    function check_box(checked) {
+        if (checked) {
+            $("#input_cash_receipt").prop("disabled", false);
+        } else {
+            $("#input_cash_receipt").val('');
+            $("#input_cash_receipt").prop("disabled", true);
+        }
+    }
+
+
 
 
 </script>
