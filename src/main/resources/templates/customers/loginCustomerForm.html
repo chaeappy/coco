@@ -20,7 +20,8 @@
         </div>
         <div class="ctr-p" id="bottom">
             <input type="text" id="inputIdText" name="id" placeholder="아이디" /><br>
-            <input type="password" id="password" name="password" placeholder="비밀번호" /><br>
+            <input type="password" id="password" name="password" placeholder="비밀번호"
+                   onKeypress="javascript:if(event.keyCode==13) {popup();}" /><br>
             <button type="button" id="loginBtn" onclick="popup();">로그인</button>
         </div>
     </div>

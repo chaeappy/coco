@@ -1,21 +1,17 @@
 package com.cafe.coco.controller;
 
-import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Drink;
-import com.cafe.coco.domain.Input;
 import com.cafe.coco.domain.Order;
 import com.cafe.coco.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
 
 @SessionAttributes("order")
 @Controller
@@ -64,6 +60,8 @@ public class OrderController {
         Order order = orderService.createOrder();
         httpSession.setAttribute("order", order);
         Enumeration<String> enum_session = httpSession.getAttributeNames();
+
+//        :: HttpSeesion 내 전체 데이터 출력
 //        while(enum_session.hasMoreElements()) {
 //            String key = enum_session.nextElement();
 //            Object val = httpSession.getAttribute(key);
