@@ -1,0 +1,5 @@
+
+:: 수정사항
+
+- cashForm.html에서 payment Controller로 리스트 데이터 넘기기(현금영수증, 영수증 발급여부)
+- 로그인 안했을 경우 order..등 페이지 접근제한

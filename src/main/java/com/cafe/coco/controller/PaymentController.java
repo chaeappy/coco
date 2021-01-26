@@ -43,6 +43,7 @@ public class PaymentController {
     public String cashForm(@SessionAttribute("customer") Customer customer,
                            @SessionAttribute("order") Order order,
                            @RequestBody String test) {
+        System.out.println(test);
         if (test != null) {
             String date = nowDate();
             String cash_receipt = "010";

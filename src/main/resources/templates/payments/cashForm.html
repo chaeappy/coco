@@ -29,19 +29,19 @@
             <div id="topNamed">
                 <span id="letter">현금결제</span>
             </div>
-
         </div>
     </div>
     <div class="ctr-p" id="two">
         <div class="ctr-p" id="solid">
             <div id="id"></div>
             <div id="inputId">
-                <input type="checkbox" id="checkbox_cash_receipt" onclick="check_box(this.checked);">현금영수증</input>
-                <input type="text" id="input_cash_receipt" name="id" placeholder="체크박스 누르면 활성화 됩니다." disabled="disabled"/>
+                <input type="checkbox" id="checkbox_cash_receipt" name="checkbox_cash_receipt"
+                       onclick="check_box(this.checked);" value="현금영수증" />현금영수증</input>
+                <input type="text" id="input_cash_receipt" name="input_cash_receipt" placeholder="체크박스 누르면 활성화 됩니다." disabled="disabled"/>
             </div>
             <div id="pw"></div>
             <div id="inputPw">
-                <input type="checkbox" class="button" id="receiptBtn">영수증</input>
+                <input type="checkbox" class="button" id="checkbox_receipt" name="checkbox_receipt">영수증</input>
             </div>
         </div>
         <div class="ctr-p" id="three">
@@ -52,23 +52,53 @@
 </body>
 <script type="text/javascript">
     function pay() {
-        data = "send";
-        $.ajax({
-            url: "/payments/cash",
-            data: data,
-            dataType: "text",
-            contentType: "text/plain; charset=utf-8;",
-            type: "POST",
-            success: function(result) {
-                if (result == 0){
-                    alert("정상적으로 결제가 완료되었습니다.");
-                    location.href="http://localhost:8080/orders";
-                } else {
-                    alert("결제 실패");
+        var box_cash_receipt;
+        var phone_num;
+        var box_receipt;
+        var list = [];
 
+        box_cash_receipt = document.getElementById("checkbox_cash_receipt");
+        if (box_cash_receipt.checked) {
+            var phone_num = document.getElementById("input_cash_receipt").value;
+        }
+        box_receipt = document.getElementById("checkbox_receipt").checked;
+        list = {
+            phone_num, box_receipt
+        }
+
+        $.ajax({
+            type: "post",
+            url: "/payments/cash",
+            data: list,
+            dataType: "text",
+            success: function(result) {
+                if (result == 0) {
+                    alert("성공");
+
+                } else {
+                    alert("오류");
                 }
             }
         });
+
+<!--        $.ajax({-->
+<!--            url: "/payments/cash",-->
+<!--            data: list,-->
+<!--            dataType: "text",-->
+<!--&lt;!&ndash;    배열 혹은 리스트 값 넘길시 필요하다고 함        &ndash;&gt;-->
+<!--            traditional: true,-->
+<!--            contentType: "list; charset=utf-8;",-->
+<!--            type: "POST",-->
+<!--            success: function(result) {-->
+<!--                if (result == 0){-->
+<!--                    alert("정상적으로 결제가 완료되었습니다.");-->
+<!--                    location.href="http://localhost:8080/orders";-->
+<!--                } else {-->
+<!--                    alert("결제 실패");-->
+
+<!--                }-->
+<!--            }-->
+<!--        });-->
 
     }
 
