@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 @Controller
 public class PaymentController {
@@ -42,11 +43,12 @@ public class PaymentController {
     @RequestMapping("/payments/cash")
     public String cashForm(@SessionAttribute("customer") Customer customer,
                            @SessionAttribute("order") Order order,
-                           @RequestBody String test) {
-        System.out.println(test);
-        if (test != null) {
+                           @RequestParam Map<Object, Object> param) {
+        String cash_receipt = (String) param.get("cash_receipt");
+        String receipt = (String) param.get("receipt");
+        System.out.println(cash_receipt + " " + receipt);
+        if (param != null) {
             String date = nowDate();
-            String cash_receipt = "010";
             Payment payment = new Payment(date, customer, "현금", order, cash_receipt);
             paymentService.save(payment);
             return "0";

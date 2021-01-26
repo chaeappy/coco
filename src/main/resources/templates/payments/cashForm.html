@@ -63,7 +63,8 @@
         }
         box_receipt = document.getElementById("checkbox_receipt").checked;
         list = {
-            phone_num, box_receipt
+            cash_receipt : phone_num,
+            receipt : JSON.stringify(box_receipt)
         }
 
         $.ajax({
