@@ -85,6 +85,7 @@ public class JdbcPaymentRepository implements PaymentRepository {
     public Map<String, Object> printReceipt(Customer customer, Long pk) {
         HashMap<String, Object> payments = new HashMap<>();
         Payment payment = suchPayment(customer, pk);
+        System.out.println("test : " + payment.getPk());
         payments.put("pk", payment.getPk());
         payments.put("date", payment.getDate());
         payments.put("customer", payment.getCustomer().getId());
@@ -129,6 +130,7 @@ public class JdbcPaymentRepository implements PaymentRepository {
 
     private Order getOrderInfo(Customer customer, Long pk) {
         sql = "SELECT * FROM orders WHERE payment_pk = (?);";
+        System.out.println("order test : " + pk);
         ArrayList<Input> inputs = new ArrayList<>();
         Order order = null;
         try {
@@ -137,8 +139,7 @@ public class JdbcPaymentRepository implements PaymentRepository {
             preparedStatement.setLong(1, pk);
             resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
-                Long payment_pk = resultSet.getLong("payment_pk");
+            while (resultSet.next()) {
                 Long drink_pk = resultSet.getLong("drink_pk");
                 int howMAny = resultSet.getInt("ea");
                 Drink drink = getDrinkInfo(drink_pk);
@@ -146,6 +147,7 @@ public class JdbcPaymentRepository implements PaymentRepository {
                 inputs.add(input);
             }
             order = new Order(customer, inputs);
+            System.out.println(inputs.size());
 
         } catch (SQLException e) {
             e.printStackTrace();

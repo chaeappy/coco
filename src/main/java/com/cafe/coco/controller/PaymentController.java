@@ -1,6 +1,7 @@
 package com.cafe.coco.controller;
 
 import com.cafe.coco.domain.Customer;
+import com.cafe.coco.domain.Input;
 import com.cafe.coco.domain.Order;
 import com.cafe.coco.domain.Payment;
 import com.cafe.coco.service.PaymentService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
@@ -77,10 +79,12 @@ public class PaymentController {
 
     @ResponseBody
     @RequestMapping("/payments/printReceipt")
-    public Map<String, Object> suchPaymentInfo(@SessionAttribute("customer") Customer customer,
+    public Map<String, Object> printReceipt(@SessionAttribute("customer") Customer customer,
                                   @RequestParam Map<Object, Object> param) {
         String pk = (String) param.get("pk");
-        Map<String, Object> payments = paymentService.printReceipt(customer, Long.parseLong(pk));
+        Long payment_pk = Long.parseLong(pk);
+        Map<String, Object> payments = paymentService.printReceipt(customer, payment_pk);
+        ArrayList<Object> list = (ArrayList<Object>) payments.get("inputs");
         return payments;
     }
 
