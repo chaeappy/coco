@@ -8,3 +8,9 @@
 
 /// payment레포에서 영수증 재발급위한 메서드 구현중이엇음..
 /// order에 customer 정보 변수 넣을까 말까?
+
+
+
+???
+1. orderForm.html ajax내 펑션중  $.each(list, function(index, value) {
+여기서 value는 뭘 뜻하는 거임..?

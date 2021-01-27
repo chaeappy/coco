@@ -51,7 +51,7 @@
                 var customer_id = payments.customer;
                 var payment_way = payments.payment_way;
                 var cash_receipt = payments.cash_receipt;
-                var order = payments.order;
+                var list = payments.inputs;
 
                 html += "<tr>";
                 html += "<td>" + "[ 번호 : " + payment_pk + " ] " + payment_date + "</td>";
@@ -69,17 +69,17 @@
                 html += "<td>" + "현금영수증 : " + cash_receipt + "</td>";
                 html += "</tr>";
 
-<!--                html += "<tr>";-->
-<!--                html += "<td>" + "[ 구매목록 ]" + </td>;-->
-<!--                html += "</tr>";-->
+                html += "<tr>";
+                html += "<td>" + "[ 구매목록 ]" + "</td>";
+                html += "</tr>";
 
-<!--                $.each(order, function(index) {-->
-<!--                    html += "<tr>";-->
-<!--                    html += "<td>" + order[index].drink.name + "</td>";-->
-<!--                    html += "<td>" + list[index].howMany + "</td>";-->
-<!--                    html += "</tr>";-->
-<!--                    ++index;-->
-<!--                });-->
+                $.each(list, function(index, value) {
+                    html += "<tr>";
+                    html += "<td>" + list[index].drink.name + "</td>";
+                    html += "<td>" + list[index].howMany + "</td>";
+                    html += "</tr>";
+                    ++index;
+                });
 
                 $("#div_right").html(html);
 

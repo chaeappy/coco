@@ -90,7 +90,7 @@ public class JdbcPaymentRepository implements PaymentRepository {
         payments.put("customer", payment.getCustomer().getId());
         payments.put("payment_way", payment.getPayment_way());
         payments.put("cash_receipt", payment.getCash_receipt());
-        payments.put("order", payment.getOrder());
+        payments.put("inputs", payment.getOrder().getInputs());
 
         return payments;
     }
