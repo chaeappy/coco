@@ -1,0 +1,115 @@
+<!--
+:: 결제취소 폼
+- 필요한 정보 입력받음 (날짜 및 payment넘버)
+
+-->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/img/logo.png}"/>
+    <link href="/css/receiptForm.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="div_left">
+        <label for="date">날짜</label>
+        <input type="date" id="date" name="date"/><br>
+        <label for="input_pk">번호</label>
+        <input type="text" id="input_pk" name="input_pk"/>
+        <button type="button" id="submit" onclick="find();">조회</button>
+    </div>
+    <div>
+        <button type="button" id="button_delete" onclick="deletePayment();">삭제</button>
+    </div>
+    <div id="div_right">
+
+    </div>
+
+</div> <!-- /container -->
+</body>
+<script type="text/javascript">
+    function find() {
+        var html = "";
+        var list = [];
+        var date;
+        var pk;
+        date = document.getElementById("date").value;
+        pk = document.getElementById("input_pk").value;
+        list = {
+            date : date,
+            pk : pk
+        }
+
+        $.ajax({
+            type : "post",
+            url : "/payments/cancel",
+            data : list,
+            success : function(payments) {
+                var payment_pk = payments.pk;
+                var payment_date = payments.date;
+                var customer_id = payments.customer;
+                var payment_way = payments.payment_way;
+                var cash_receipt = payments.cash_receipt;
+                var inputs = payments.inputs;
+                var total = payments.total;
+
+                html += "<tr>";
+                html += "<td>" + "[ 번호 : " + payment_pk + " ] " + payment_date + "</td>";
+                html += "</tr>";
+
+                html += "<tr>";
+                html += "<td>" + "customer : " + customer_id + "</td>";
+                html += "</tr>";
+
+                html += "<tr>";
+                html += "<td>" + "결제방법 : " + payment_way + "</td>";
+                html += "</tr>";
+
+                html += "<tr>";
+                html += "<td>" + "현금영수증 : " + cash_receipt + "</td>";
+                html += "</tr>";
+
+                html += "<tr>";
+                html += "<td>" + "[ 구매목록 ]" + "</td>";
+                html += "</tr>";
+
+                $.each(inputs, function(index, value) {
+                    html += "<tr>";
+                    html += "<td>" + inputs[index].drink.name + "</td>";
+                    html += "<td>" + inputs[index].howMany + "</td>";
+                    html += "</tr>";
+                    ++index;
+                });
+
+                html += "<tr>";
+                html += "<td>" + "total : " + total + "원" + "</td>";
+                html += "</tr>";
+
+                $("#div_right").html(html);
+
+            }
+        });
+    };
+
+    function deletePayment() {
+        var pk_num = document.getElementById("input_pk").value;
+        alert(pk_num);
+        $.ajax({
+            type : "post",
+            url : "/payments/cancelDo",
+            data : pk_num,
+            contentType: "text/plain; charset=utf-8;",
+            success : function(result) {
+                if (result == 0) {
+                    alert("썽공!!!!!!!!");
+                } else {
+                    alert("실패");
+                }
+            }
+        });
+    }
+</script>
+</html>

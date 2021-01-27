@@ -35,5 +35,7 @@ public class PaymentService {
     /**
      * 결재취소
      */
-    public void cancelPayment(){}
+    public String cancelPayment(Customer customer, Long pk){
+        return paymentRepository.cancelPayment(customer, pk);
+    }
 }

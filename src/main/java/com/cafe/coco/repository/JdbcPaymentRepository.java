@@ -181,8 +181,51 @@ public class JdbcPaymentRepository implements PaymentRepository {
     }
 
     @Override
-    public void cancelPayment() {
+    public String cancelPayment(Customer customer, Long pk) {
+        suchPayment(customer, pk);
+        int result = deleteOrder(pk);
+        if (result != 0) {
+            if (deletePayment(pk) != 0) {
+                return "성공";
+            }
+        }
+            return "실패";
+    }
 
+    public int deleteOrder(Long pk) {
+        sql = "DELETE FROM orders WHERE payment_pk = (?);";
+        int result = 0;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, pk);
+            result = preparedStatement.executeUpdate();
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+          return result;
+        }
+    }
+
+    public int deletePayment(Long pk) {
+        sql = "DELETE FROM payment WHERE pk = (?);";
+        int result = 0;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, pk);
+            result = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+            return result;
+        }
     }
 
     @Override

@@ -60,23 +60,53 @@ public class PaymentController {
     }
 
     /**
-     * 결제취소
+     * 결제취소 홈
      */
-    public void cancelPayment() {
-        paymentService.cancelPayment();
+    @GetMapping("/payments/cancel")
+    public String cancelPayment() {
+        return "payments/cancelForm";
     }
 
+    /**
+     * 결제취소 폼
+     */
 
+    @ResponseBody
+    @RequestMapping("/payments/cancel")
+    public Map<String, Object> cancelPayment(@SessionAttribute("customer") Customer customer,
+                                            @RequestParam Map<Object, Object> param) {
+        String pk = (String) param.get("pk");
+        Long payment_pk = Long.parseLong(pk);
+        Map<String, Object> payments = paymentService.printReceipt(customer, payment_pk);
+        ArrayList<Object> list = (ArrayList<Object>) payments.get("inputs");
+        return payments;
+    }
+
+    @ResponseBody
+    @RequestMapping("/payments/cancelDo")
+    public String cancelDo(@SessionAttribute("customer") Customer customer,
+                           @RequestBody String data) {
+        Long pk = Long.parseLong(data);
+        String result= paymentService.cancelPayment(customer, pk);
+        if (result.equals("성공")) {
+            return "0";
+        } else {
+            return "-1";
+        }
+    }
 
 
     /**
-     * 영수증 재발행
+     * 영수증 재발행 홈
      */
     @GetMapping("/payments/printReceipt")
-    public String printReceipt() {
+    public String printReceiptHome() {
         return "payments/receiptForm";
     }
 
+    /**
+     * 영수증 재발행 폼
+     */
     @ResponseBody
     @RequestMapping("/payments/printReceipt")
     public Map<String, Object> printReceipt(@SessionAttribute("customer") Customer customer,
