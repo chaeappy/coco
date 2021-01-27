@@ -7,7 +7,10 @@ import com.cafe.coco.domain.Order;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,7 +41,7 @@ public class JdbcOrderRepository implements OrderRepository{
      * 메뉴저장
      */
     @Override
-    public ArrayList<Drink> menu() {
+    public HashMap<Long, Drink> menu() {
         sql = "SELECT * FROM drink;";
         // hashMap != null 모두 삭제하고 시작
         clean();
@@ -50,11 +53,12 @@ public class JdbcOrderRepository implements OrderRepository{
 
 
             while (resultSet.next()) {
-                Long pk = resultSet.getLong(1);
-                String name = resultSet.getString(2);
-                int price = resultSet.getInt(3);
-                String type = resultSet.getString(4);
+                Long pk = resultSet.getLong("pk");
+                String name = resultSet.getString("name");
+                int price = resultSet.getInt("price");
+                String type = resultSet.getString("type");
                 Drink drink = new Drink(pk, name, price, type);
+                System.out.println(drink);
                 if (drink != null) {
                     drinks.put(pk, drink);
                 }
@@ -64,7 +68,7 @@ public class JdbcOrderRepository implements OrderRepository{
         } finally {
             close(connection, preparedStatement, resultSet);
         }
-        return  menus = new ArrayList<Drink>(drinks.values());
+        return  drinks;
     }
 
     /**

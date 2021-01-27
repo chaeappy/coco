@@ -1,5 +1,6 @@
 package com.cafe.coco.controller;
 
+import com.cafe.coco.repository.JdbcOrderRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

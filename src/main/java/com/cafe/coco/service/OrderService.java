@@ -21,7 +21,7 @@ public class OrderService {
     /**
      * 메뉴생성 및 출력
      */
-    public List menu() {
+    public HashMap<Long, Drink> menu() {
         return orderRepository.menu();
     }
 

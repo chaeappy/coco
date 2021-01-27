@@ -4,10 +4,8 @@ import com.cafe.coco.domain.*;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,13 +83,13 @@ public class JdbcPaymentRepository implements PaymentRepository {
     public Map<String, Object> printReceipt(Customer customer, Long pk) {
         HashMap<String, Object> payments = new HashMap<>();
         Payment payment = suchPayment(customer, pk);
-        System.out.println("test : " + payment.getPk());
         payments.put("pk", payment.getPk());
         payments.put("date", payment.getDate());
         payments.put("customer", payment.getCustomer().getId());
         payments.put("payment_way", payment.getPayment_way());
         payments.put("cash_receipt", payment.getCash_receipt());
         payments.put("inputs", payment.getOrder().getInputs());
+        payments.put("total", payment.getOrder().getTotal());
 
         return payments;
     }
@@ -99,7 +97,6 @@ public class JdbcPaymentRepository implements PaymentRepository {
     public Payment suchPayment(Customer customer, Long payment_pk) {
         Order order = getOrderInfo(customer, payment_pk);
         Payment payment = getPaymentInfo(payment_pk, order);
-
         return payment;
     }
     private Payment getPaymentInfo(Long pk, Order order) {
@@ -130,7 +127,6 @@ public class JdbcPaymentRepository implements PaymentRepository {
 
     private Order getOrderInfo(Customer customer, Long pk) {
         sql = "SELECT * FROM orders WHERE payment_pk = (?);";
-        System.out.println("order test : " + pk);
         ArrayList<Input> inputs = new ArrayList<>();
         Order order = null;
         try {
@@ -141,13 +137,15 @@ public class JdbcPaymentRepository implements PaymentRepository {
 
             while (resultSet.next()) {
                 Long drink_pk = resultSet.getLong("drink_pk");
-                int howMAny = resultSet.getInt("ea");
-                Drink drink = getDrinkInfo(drink_pk);
-                Input input = new Input(drink, howMAny);
+                String name = resultSet.getString("drink_name");
+                int howMany = resultSet.getInt("ea");
+                int total = resultSet.getInt("total");
+                int price = total/howMany;
+                Drink drink = new Drink(drink_pk, name, price);
+                Input input = new Input(drink, howMany);
                 inputs.add(input);
             }
             order = new Order(customer, inputs);
-            System.out.println(inputs.size());
 
         } catch (SQLException e) {
             e.printStackTrace();

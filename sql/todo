@@ -14,3 +14,9 @@
 ???
 1. orderForm.html ajax내 펑션중  $.each(list, function(index, value) {
 여기서 value는 뭘 뜻하는 거임..?
+
+2. payment레포에서 Order레포의 해쉬맵 가져다 쓰려면 public static 이어야함??
+
+3. PaymentRepository에서 OrderRepository HashMap 가져오고 싶은 경우, 18번째 줄 처럼 이용해도 됨?
+
+4. CocoApplication 메인 시작하면 모든 클래스 생성자 호출되는거 아닌가..?

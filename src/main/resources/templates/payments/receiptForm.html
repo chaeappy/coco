@@ -50,7 +50,8 @@
                 var customer_id = payments.customer;
                 var payment_way = payments.payment_way;
                 var cash_receipt = payments.cash_receipt;
-                var list = payments.inputs;
+                var inputs = payments.inputs;
+                var total = payments.total;
 
                 html += "<tr>";
                 html += "<td>" + "[ 번호 : " + payment_pk + " ] " + payment_date + "</td>";
@@ -72,13 +73,18 @@
                 html += "<td>" + "[ 구매목록 ]" + "</td>";
                 html += "</tr>";
 
-                $.each(list, function(index, value) {
+                $.each(inputs, function(index, value) {
                     html += "<tr>";
-                    html += "<td>" + list[index].drink.name + "</td>";
-                    html += "<td>" + list[index].howMany + "</td>";
+                    html += "<td>" + inputs[index].drink.name + "</td>";
+                    html += "<td>" + inputs[index].howMany + "</td>";
                     html += "</tr>";
                     ++index;
                 });
+
+                html += "<tr>";
+                html += "<td>" + "total : " + total + "원" + "</td>";
+                html += "</tr>";
+
 
                 $("#div_right").html(html);
 

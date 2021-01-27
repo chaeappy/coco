@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +31,9 @@ public class OrderController {
     }
 
     @GetMapping("/orders/orderForm")
-    public String orderForm(Model model) {
-        List<Drink> menus = orderService.menu();
+    public String orderForm(HttpSession httpSession, Model model) {
+        HashMap<Long, Drink> drinks = orderService.menu();
+        ArrayList<Drink> menus = new ArrayList<Drink>(drinks.values());
         model.addAttribute("menus", menus);
         return "orders/orderForm";
     }

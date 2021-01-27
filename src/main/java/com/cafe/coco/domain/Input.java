@@ -20,7 +20,7 @@ public class Input {
     public Input(Drink drink, int howMany) {
         this.drink = drink;
         this.howMany = howMany;
-        this.total = drink.getPrice() * howMany;
+        setTotal();
     }
 
     public Drink getDrink() {

@@ -21,6 +21,12 @@ public class Drink {
         this.type = type;
     }
 
+    public Drink(Long pk, String name, int price) {
+        this.pk = pk;
+        this.name = name;
+        this.price = price;
+    }
+
     public Long getPk() {
         return pk;
     }
