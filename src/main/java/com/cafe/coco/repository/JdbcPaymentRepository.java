@@ -1,15 +1,15 @@
 package com.cafe.coco.repository;
 
-import com.cafe.coco.domain.Drink;
-import com.cafe.coco.domain.Input;
-import com.cafe.coco.domain.Order;
-import com.cafe.coco.domain.Payment;
+import com.cafe.coco.domain.*;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JdbcPaymentRepository implements PaymentRepository {
     private final DataSource dataSourceForPayment;
@@ -82,8 +82,102 @@ public class JdbcPaymentRepository implements PaymentRepository {
     }
 
     @Override
-    public void printReceipt() {
+    public Map<String, Object> printReceipt(Customer customer, Long pk) {
+        HashMap<String, Object> payments = new HashMap<>();
+        Payment payment = suchPayment(customer, pk);
+        payments.put("pk", payment.getPk());
+        payments.put("date", payment.getDate());
+        payments.put("customer", payment.getCustomer().getId());
+        payments.put("payment_way", payment.getPayment_way());
+        payments.put("cash_receipt", payment.getCash_receipt());
+        payments.put("order", payment.getOrder());
 
+        return payments;
+    }
+
+    public Payment suchPayment(Customer customer, Long payment_pk) {
+        Order order = getOrderInfo(customer, payment_pk);
+        Payment payment = getPaymentInfo(payment_pk, order);
+
+        return payment;
+    }
+    private Payment getPaymentInfo(Long pk, Order order) {
+        sql = "SELECT * FROM payment WHERE pk = (?);";
+        Payment payment = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, pk);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Long payment_pk = resultSet.getLong("pk");
+                String payment_date = resultSet.getString("payment_date");
+                String payment_way = resultSet.getString("payment_way");
+                String cash_receipt = resultSet.getString("cash_receipt");
+                payment = new Payment(payment_pk, payment_date, order.getCustomer(), payment_way, cash_receipt, order);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+            return payment;
+        }
+    }
+
+
+    private Order getOrderInfo(Customer customer, Long pk) {
+        sql = "SELECT * FROM orders WHERE payment_pk = (?);";
+        ArrayList<Input> inputs = new ArrayList<>();
+        Order order = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, pk);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Long payment_pk = resultSet.getLong("payment_pk");
+                Long drink_pk = resultSet.getLong("drink_pk");
+                int howMAny = resultSet.getInt("ea");
+                Drink drink = getDrinkInfo(drink_pk);
+                Input input = new Input(drink, howMAny);
+                inputs.add(input);
+            }
+            order = new Order(customer, inputs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+        }
+        return order;
+    }
+
+    private Drink getDrinkInfo(Long drink_pk) {
+        sql = "SELECT * FROM drink WHERE pk = (?);";
+        Drink drink = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, drink_pk);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Long pk = resultSet.getLong("pk");
+                String name = resultSet.getString("name");
+                String price = resultSet.getString("price");
+                String type = resultSet.getString("type");
+                drink = new Drink(pk, name, Integer.parseInt(price), type);
+                return drink;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, preparedStatement, resultSet);
+            return drink;
+        }
     }
 
     @Override

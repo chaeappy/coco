@@ -14,15 +14,34 @@ public class Payment {
     String date;
     Customer customer;
     String payment_way;
-    Order order;
     String cash_receipt;
+    Order order;
 
-    public Payment(String date, Customer customer, String payment_way, Order order, String cash_receipt) {
+    public Payment(String date, Customer customer, String payment_way, String cash_receipt, Order order) {
         this.date = date;
         this.customer = customer;
         this.payment_way = payment_way;
-        this.order = order;
         this.cash_receipt = cash_receipt;
+        this.order = order;
+    }
+
+    public Payment(Long pk, String date, Customer customer, String payment_way, String cash_receipt, Order order) {
+        this.pk = pk;
+        this.date = date;
+        this.customer = customer;
+        this.payment_way = payment_way;
+        this.cash_receipt = cash_receipt;
+        this.order = order;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        str += "[ 번호 : " + pk + " ] " + date + "\n" +
+                "구매자 : " + customer.getId() + "\n" +
+                "결제방법 : " + payment_way + ", 현금영수증 : " + cash_receipt + "\n" +
+                "[ 구매목록 ] " + "\n" + order;
+        return str;
     }
 
     public Long getPk() {

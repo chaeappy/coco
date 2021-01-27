@@ -1,9 +1,12 @@
 package com.cafe.coco.service;
 
+import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Payment;
 import com.cafe.coco.domain.Receipt;
 import com.cafe.coco.repository.OrderRepository;
 import com.cafe.coco.repository.PaymentRepository;
+
+import java.util.Map;
 
 public class PaymentService {
     PaymentRepository paymentRepository;
@@ -23,7 +26,11 @@ public class PaymentService {
     /**
      * 영수증 발행
      */
-    public void printReceipt() {}
+    public Map<String, Object> printReceipt(Customer customer, Long pk) {
+        Map<String, Object> payments = paymentRepository.printReceipt(customer, pk);
+        return payments;
+    }
+
 
     /**
      * 결재취소

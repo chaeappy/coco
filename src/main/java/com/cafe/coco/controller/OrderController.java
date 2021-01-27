@@ -1,5 +1,6 @@
 package com.cafe.coco.controller;
 
+import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Order;
 import com.cafe.coco.service.OrderService;
@@ -56,12 +57,12 @@ public class OrderController {
     }
 
     @GetMapping("/payments")
-    public String createOrder(HttpSession httpSession) {
+    public String createOrder(@SessionAttribute("customer") Customer customer, HttpSession httpSession) {
         /*
         order 미저장 상태 -> payment db저장 후 진행하므로 객체만 생성한다.
         order 객체생성을 위한 inputs맵이 Repository에 있으므로 Repo 클래스 내 메서드를 이용하여 생성하고 리턴해줌
          */
-        Order order = orderService.createOrder();
+        Order order = orderService.createOrder(customer);
         httpSession.setAttribute("order", order);
 
 //        :: HttpSeesion 내 전체 데이터 출력

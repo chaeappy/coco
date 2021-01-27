@@ -1,5 +1,6 @@
 package com.cafe.coco.repository;
 
+import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Input;
 import com.cafe.coco.domain.Order;
@@ -24,7 +25,7 @@ public interface OrderRepository {
     int total();
 
     // 주문목록 생성
-    Order createOrder();
+    Order createOrder(Customer customer);
 
 
 

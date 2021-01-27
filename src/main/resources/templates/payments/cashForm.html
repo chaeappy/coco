@@ -58,10 +58,13 @@
         var list = [];
 
         box_cash_receipt = document.getElementById("checkbox_cash_receipt");
+
         if (box_cash_receipt.checked) {
             var phone_num = document.getElementById("input_cash_receipt").value;
         }
+
         box_receipt = document.getElementById("checkbox_receipt").checked;
+
         list = {
             cash_receipt : phone_num,
             receipt : JSON.stringify(box_receipt)
@@ -74,33 +77,14 @@
             dataType: "text",
             success: function(result) {
                 if (result == 0) {
-                    alert("성공");
+                    alert("정상적으로 결제가 완료되었습니다.");
+                    location.href="http://localhost:8080/orders";
 
                 } else {
                     alert("오류");
                 }
             }
         });
-
-<!--        $.ajax({-->
-<!--            url: "/payments/cash",-->
-<!--            data: list,-->
-<!--            dataType: "text",-->
-<!--&lt;!&ndash;    배열 혹은 리스트 값 넘길시 필요하다고 함        &ndash;&gt;-->
-<!--            traditional: true,-->
-<!--            contentType: "list; charset=utf-8;",-->
-<!--            type: "POST",-->
-<!--            success: function(result) {-->
-<!--                if (result == 0){-->
-<!--                    alert("정상적으로 결제가 완료되었습니다.");-->
-<!--                    location.href="http://localhost:8080/orders";-->
-<!--                } else {-->
-<!--                    alert("결제 실패");-->
-
-<!--                }-->
-<!--            }-->
-<!--        });-->
-
     }
 
     function check_box(checked) {

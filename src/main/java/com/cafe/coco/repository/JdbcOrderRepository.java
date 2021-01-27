@@ -1,5 +1,6 @@
 package com.cafe.coco.repository;
 
+import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Input;
 import com.cafe.coco.domain.Order;
@@ -117,9 +118,8 @@ public class JdbcOrderRepository implements OrderRepository{
     }
 
     @Override
-    public Order createOrder() {
-
-        return new Order(inputs);
+    public Order createOrder(Customer customer) {
+        return new Order(customer, inputs);
     }
 
 

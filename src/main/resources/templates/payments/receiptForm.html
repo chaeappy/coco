@@ -1,0 +1,93 @@
+<!--
+:: 영수증 재발행을 위한 폼
+- 필요한 정보 입력받음 (날짜 및 payment넘버)
+
+-->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/img/logo.png}"/>
+    <link href="/css/receiptForm.css" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="div_left">
+        <label for="date">날짜</label>
+        <input type="date" id="date" name="date"/><br>
+        <label for="input_pk">번호</label>
+        <input type="text" id="input_pk" name="input_pk"/>
+        <input type="button" id="submit" value="조회" onclick="find();"/>
+    </div>
+    <div id="div_right">
+
+    </div>
+
+</div> <!-- /container -->
+</body>
+<script type="text/javascript">
+    function find() {
+        var html = "";
+        var list = [];
+        var date;
+        var pk;
+        date = document.getElementById("date").value;
+        pk = document.getElementById("input_pk").value;
+
+        list = {
+            date : date,
+            pk : pk
+        }
+
+        $.ajax({
+            type : "post",
+            url : "/payments/printReceipt",
+            data : list,
+            success : function(payments) {
+                var payment_pk = payments.pk;
+                var payment_date = payments.date;
+                var customer_id = payments.customer;
+                var payment_way = payments.payment_way;
+                var cash_receipt = payments.cash_receipt;
+                var order = payments.order;
+
+                html += "<tr>";
+                html += "<td>" + "[ 번호 : " + payment_pk + " ] " + payment_date + "</td>";
+                html += "</tr>";
+
+                html += "<tr>";
+                html += "<td>" + "customer : " + customer_id + "</td>";
+                html += "</tr>";
+
+                html += "<tr>";
+                html += "<td>" + "결제방법 : " + payment_way + "</td>";
+                html += "</tr>";
+
+                html += "<tr>";
+                html += "<td>" + "현금영수증 : " + cash_receipt + "</td>";
+                html += "</tr>";
+
+<!--                html += "<tr>";-->
+<!--                html += "<td>" + "[ 구매목록 ]" + </td>;-->
+<!--                html += "</tr>";-->
+
+<!--                $.each(order, function(index) {-->
+<!--                    html += "<tr>";-->
+<!--                    html += "<td>" + order[index].drink.name + "</td>";-->
+<!--                    html += "<td>" + list[index].howMany + "</td>";-->
+<!--                    html += "</tr>";-->
+<!--                    ++index;-->
+<!--                });-->
+
+                $("#div_right").html(html);
+
+
+
+
+            }
+        });
+    }
+</script>
+</html>

@@ -1,5 +1,6 @@
 package com.cafe.coco.service;
 
+import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Drink;
 import com.cafe.coco.domain.Input;
 import com.cafe.coco.domain.Order;
@@ -43,8 +44,8 @@ public class OrderService {
     /**
      * 주문목록 생성
      */
-    public Order createOrder() {
-        return orderRepository.createOrder();
+    public Order createOrder(Customer customer) {
+        return orderRepository.createOrder(customer);
     }
 
 }

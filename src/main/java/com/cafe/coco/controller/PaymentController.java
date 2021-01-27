@@ -46,10 +46,9 @@ public class PaymentController {
                            @RequestParam Map<Object, Object> param) {
         String cash_receipt = (String) param.get("cash_receipt");
         String receipt = (String) param.get("receipt");
-        System.out.println(cash_receipt + " " + receipt);
         if (param != null) {
             String date = nowDate();
-            Payment payment = new Payment(date, customer, "현금", order, cash_receipt);
+            Payment payment = new Payment(date, customer, "현금", cash_receipt, order);
             paymentService.save(payment);
             return "0";
         } else {
@@ -57,26 +56,33 @@ public class PaymentController {
         }
 
     }
-//    @ResponseBody
-//    @RequestMapping("/payments/cash")
-//    public String cashForm(HttpSession httpSession, String cash_receipt, boolean receipt) {
-//        String date = nowDate();
-//        String way = "현금";
-//        Customer customer = (Customer) httpSession.getAttribute("customer");
-//        Order order = (Order) httpSession.getAttribute("order");
-//        Payment payment = new Payment(date, customer, way, order, cash_receipt, receipt);
-//        paymentService.save(payment);
-//        return "";
-//
-//    }
-
-    /**
-     * 영수증 재발행
-     */
 
     /**
      * 결제취소
      */
+    public void cancelPayment() {
+        paymentService.cancelPayment();
+    }
+
+
+
+
+    /**
+     * 영수증 재발행
+     */
+    @GetMapping("/payments/printReceipt")
+    public String printReceipt() {
+        return "payments/receiptForm";
+    }
+
+    @ResponseBody
+    @RequestMapping("/payments/printReceipt")
+    public Map<String, Object> suchPaymentInfo(@SessionAttribute("customer") Customer customer,
+                                  @RequestParam Map<Object, Object> param) {
+        String pk = (String) param.get("pk");
+        Map<String, Object> payments = paymentService.printReceipt(customer, Long.parseLong(pk));
+        return payments;
+    }
 
 
 

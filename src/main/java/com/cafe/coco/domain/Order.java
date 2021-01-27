@@ -9,10 +9,12 @@ import java.util.HashMap;
  */
 public class Order {
     private Long pk;
+    private Customer customer;
     private ArrayList<Input> inputs;
     private int total;
 
-    public Order(ArrayList<Input> inputs) {
+    public Order(Customer customer, ArrayList<Input> inputs) {
+        this.customer = customer;
         this.inputs = inputs;
         setTotal();
     }
@@ -21,9 +23,17 @@ public class Order {
         return pk;
     }
 
-//    public void setPk(Long pk) {
-//        this.pk = pk;
-//    }
+    public void setPk(Long pk) {
+        this.pk = pk;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public ArrayList<Input> getInputs() {
         return inputs;
