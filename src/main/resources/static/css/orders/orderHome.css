@@ -41,7 +41,7 @@ div#bottom {
 }
 
 
-button.button {
+.button {
 	border: 3px solid ;
 	border-color: #727274;
 	background-color: #c9c8ca;
@@ -56,6 +56,19 @@ button.button {
 
 button#logBtn {
 	margin-top: 20px;
+}
+
+button#btn_logout {
+	float: right;
+	border: 3px solid ;
+    border-color: #727274;
+	background-color: #c9c8ca;
+	font-size: 100%;
+	color: #515152;
+	padding: 10px;
+	width: 100px;
+	margin: 20px 20px auto;
+	border-radius: 15px;
 }
 
 img {

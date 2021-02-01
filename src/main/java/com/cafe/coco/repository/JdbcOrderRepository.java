@@ -58,7 +58,6 @@ public class JdbcOrderRepository implements OrderRepository{
                 int price = resultSet.getInt("price");
                 String type = resultSet.getString("type");
                 Drink drink = new Drink(pk, name, price, type);
-                System.out.println(drink);
                 if (drink != null) {
                     drinks.put(pk, drink);
                 }

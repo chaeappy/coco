@@ -55,7 +55,7 @@ img {
 }
 
 
-button.button {
+.button {
 	float: right;
 	border: 3px solid ;
     border-color: #727274;
