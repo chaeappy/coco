@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.cafe'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1-test'
 sourceCompatibility = '8'
 
 repositories {

@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 
 @SessionAttributes("order")
 @Controller
@@ -56,6 +54,11 @@ public class OrderController {
         Long pk = Long.valueOf(str);
         HashMap<String, Object> send = orderService.selectMenu(pk);
         return send;
+    }
+
+    @GetMapping("/orders/orderList")
+    public void orderList() {
+
     }
 
     @GetMapping("/payments")
