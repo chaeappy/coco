@@ -12,6 +12,27 @@
 
     </div>
 </div> <!-- /container -->
-
 </body>
 </html>
+
+<scipt type="text/javascript">
+    $(document).ready(function(send) {
+    list = send.inputs;
+    total = send.total;
+
+    $.each(list, function(index, value) {
+        html += "<tr>";
+        html += "<td>" + list[index].drink.name + "</td>";
+        html += "<td>" + list[index].howMany + "</td>";
+        html += "</tr>";
+        ++index;
+    });
+        html += "<tr>";
+        html += "<td>" + "합계" + "</td>"
+        html += "<td>" + total + "</td>";
+        html += "</tr>";
+        $("#div").html(html);
+    });
+
+
+</scipt>

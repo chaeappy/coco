@@ -107,11 +107,7 @@ public class JdbcOrderRepository implements OrderRepository{
         int total = total();
         send.put("inputs", inputs);
         send.put("total", total);
-//        if (inputs.contains(input)) {
-//            inputs.remove(input);
-//            input.setHowMany(howMany);
-//            inputs.add(input);
-//        }
+
         return send;
     }
 

@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 @SessionAttributes("order")
 @Controller
@@ -33,6 +35,10 @@ public class OrderController {
         HashMap<Long, Drink> drinks = orderService.menu();
         ArrayList<Drink> menus = new ArrayList<Drink>(drinks.values());
         model.addAttribute("menus", menus);
+        if (!model.containsAttribute("map")) {
+            model.addAttribute("map", new HashMap<String, Object>());
+            System.out.println("ok");
+        }
         return "orders/orderForm";
     }
 
@@ -49,11 +55,15 @@ public class OrderController {
 //    }
 
     @ResponseBody
-    @PostMapping("/orders/orderForm")
-    public HashMap<String, Object> selectMenu(@RequestBody String str) {
+    @RequestMapping("/orders/orderForm")
+    public String selectMenu(@RequestBody String str,
+                             @ModelAttribute("map") HashMap<String, Object> map) {
         Long pk = Long.valueOf(str);
+        orderService.selectMenu(pk);
         HashMap<String, Object> send = orderService.selectMenu(pk);
-        return send;
+        map.put("inputs", send.get("inputs"));
+        map.put("total", send.get("total"));
+        return "0";
     }
 
     @GetMapping("/orders/orderList")

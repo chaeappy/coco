@@ -92,21 +92,22 @@
             contentType: "text/plain; charset=utf-8;",
             data: id,
             success: function(send) {
-                list = send.inputs;
-                total = send.total;
+<!--                list = request.getAttribute("inputs");-->
+<!--                total = request.getAttribute("total");-->
+                alert(list);
 
-                $.each(list, function(index, value) {
-                    html += "<tr>";
-                    html += "<td>" + list[index].drink.name + "</td>";
-                    html += "<td>" + list[index].howMany + "</td>";
-                    html += "</tr>";
-                    ++index;
-                });
-                    html += "<tr>";
-                    html += "<td>" + "합계" + "</td>"
-                    html += "<td>" + total + "</td>";
-                    html += "</tr>";
-                    $("#div_right").html(html);
+<!--                $.each(list, function(index, value) {-->
+<!--                    html += "<tr>";-->
+<!--                    html += "<td>" + list[index].drink.name + "</td>";-->
+<!--                    html += "<td>" + list[index].howMany + "</td>";-->
+<!--                    html += "</tr>";-->
+<!--                    ++index;-->
+<!--                });-->
+<!--                    html += "<tr>";-->
+<!--                    html += "<td>" + "합계" + "</td>"-->
+<!--                    html += "<td>" + total + "</td>";-->
+<!--                    html += "</tr>";-->
+<!--                    $("#div_right").html(html);-->
 
             }
         });
