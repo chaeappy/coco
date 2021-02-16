@@ -33,6 +33,8 @@ public class OrderController {
         ArrayList<Drink> coffee = new ArrayList<>();
         ArrayList<Drink> latte = new ArrayList<>();
         ArrayList<Drink> tea = new ArrayList<>();
+        ArrayList<Drink> soda = new ArrayList<>();
+        ArrayList<Drink> etc = new ArrayList<>();
 
         HashMap<Long, Drink> drinks = orderService.menu();
 
@@ -43,11 +45,17 @@ public class OrderController {
                 latte.add(drink);
             } else if (drink.getType().equals("tea")) {
                 tea.add(drink);
+            } else if (drink.getType().equals("soda")) {
+                soda.add(drink);
+            } else if (drink.getType().equals("etc")) {
+                etc.add(drink);
             }
         }
         model.addAttribute("coffee", coffee);
         model.addAttribute("latte", latte);
         model.addAttribute("tea", tea);
+        model.addAttribute("soda", soda);
+        model.addAttribute("etc", etc);
         return "orders/orderForm";
     }
 
