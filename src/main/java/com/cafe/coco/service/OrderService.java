@@ -2,14 +2,10 @@ package com.cafe.coco.service;
 
 import com.cafe.coco.domain.Customer;
 import com.cafe.coco.domain.Drink;
-import com.cafe.coco.domain.Input;
 import com.cafe.coco.domain.Order;
 import com.cafe.coco.repository.OrderRepository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class OrderService {
     private final OrderRepository orderRepository;
@@ -20,6 +16,8 @@ public class OrderService {
 
     /**
      * 메뉴생성 및 출력
+     * @param
+     * @return
      */
     public HashMap<Long, Drink> menu() {
         return orderRepository.menu();

@@ -8,31 +8,30 @@
 </head>
 <body>
 <div class="container">
+    <p>haha</p>
     <div id="div">
-
+        <table>
+            <thead>
+            <tr>
+                <td>음료</td>
+                <td>수량</td>
+                <td>#</td>
+            </tr>
+            </thead>
+            <tbody >
+            <tr th:each="input : ${list}">
+                <td th:text="${input.drink}"></td>
+                <td th:text="${input.howMany}"></td>
+                <td>잉</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div> <!-- /container -->
 </body>
 </html>
 
 <scipt type="text/javascript">
-    $(document).ready(function(send) {
-    list = send.inputs;
-    total = send.total;
-
-    $.each(list, function(index, value) {
-        html += "<tr>";
-        html += "<td>" + list[index].drink.name + "</td>";
-        html += "<td>" + list[index].howMany + "</td>";
-        html += "</tr>";
-        ++index;
-    });
-        html += "<tr>";
-        html += "<td>" + "합계" + "</td>"
-        html += "<td>" + total + "</td>";
-        html += "</tr>";
-        $("#div").html(html);
-    });
 
 
 </scipt>

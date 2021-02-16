@@ -14,6 +14,10 @@ public class Drink {
     private int price;
     private String type;
 
+    public String getType() {
+        return type;
+    }
+
     public Drink(Long pk, String name, int price, String type) {
         this.pk = pk;
         this.name = name;

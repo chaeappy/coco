@@ -48,16 +48,51 @@
         <div id="latte" class="w3-container w3-border city" style="display:none">
             <h2>Latte</h2>
             <p>Paris is the capital of France.</p>
+            <table>
+                <thead>
+                <tr>
+                    <td>음료</td>
+                    <td>가격</td>
+                    <td>#</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="drink : ${menus}">
+                    <td th:id="${drink.name}" th:text="${drink.name}"></td>
+                    <td th:text="${drink.price}"></td>
+                    <td>
+                        <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
+                        <input type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
         <div id="tea" class="w3-container w3-border city" style="display:none">
             <h2>Tea</h2>
             <p>Tokyo is the capital of Japan.</p>
+
         </div>
     </div>
 
 
     <div id="div_right">
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <td>음료</td>-->
+<!--                <td>수량</td>-->
+<!--                <td>#</td>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody >-->
+<!--            <tr th:each="input : ${inputs}">-->
+<!--                <td th:id="${input.drink.name}" th:text="${input.drink.name}"></td>-->
+<!--                <td th:text="${input.howMany}"></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
     </div>
     <div id="div_right_footer">
         <button type="button" id="paymentBtn" onclick="location.href='/payments'">완료</button>
@@ -82,7 +117,7 @@
     }
 
     function addInput(text) {
-        var id = text;
+        var pk = text;
         var list = [];
         var total = 0;
         var html = "";
@@ -90,24 +125,23 @@
             type: "POST",
             url: "/orders/orderForm",
             contentType: "text/plain; charset=utf-8;",
-            data: id,
+            data: pk,
             success: function(send) {
-<!--                list = request.getAttribute("inputs");-->
-<!--                total = request.getAttribute("total");-->
-                alert(list);
+                list = send.inputs;
+                total = send.total;
 
-<!--                $.each(list, function(index, value) {-->
-<!--                    html += "<tr>";-->
-<!--                    html += "<td>" + list[index].drink.name + "</td>";-->
-<!--                    html += "<td>" + list[index].howMany + "</td>";-->
-<!--                    html += "</tr>";-->
-<!--                    ++index;-->
-<!--                });-->
-<!--                    html += "<tr>";-->
-<!--                    html += "<td>" + "합계" + "</td>"-->
-<!--                    html += "<td>" + total + "</td>";-->
-<!--                    html += "</tr>";-->
-<!--                    $("#div_right").html(html);-->
+                $.each(list, function(index, value) {
+                    html += "<tr>";
+                    html += "<td>" + list[index].drink.name + "</td>";
+                    html += "<td>" + list[index].howMany + "</td>";
+                    html += "</tr>";
+                    ++index;
+                });
+                    html += "<tr>";
+                    html += "<td>" + "합계" + "</td>"
+                    html += "<td>" + total + "</td>";
+                    html += "</tr>";
+                    $("#div_right").html(html);
 
             }
         });

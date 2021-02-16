@@ -45,7 +45,7 @@ public class JdbcOrderRepository implements OrderRepository{
      */
     @Override
     public HashMap<Long, Drink> menu() {
-        sql = "SELECT * FROM drink;";
+        sql = "SELECT * FROM drink";
         // hashMap != null 모두 삭제하고 시작
         clean();
 
@@ -82,8 +82,7 @@ public class JdbcOrderRepository implements OrderRepository{
     public HashMap<String, Object> selectMenu(Long pk) {
         Drink drink = drinks.get(pk);
         if (!checkInputs.containsKey(pk)) {
-            ++index;
-            checkInputs.put(pk, index);
+            checkInputs.put(pk, ++index);
             inputs.add(new Input(drink, 1));
         } else {
             // 수량변경
@@ -107,7 +106,11 @@ public class JdbcOrderRepository implements OrderRepository{
         int total = total();
         send.put("inputs", inputs);
         send.put("total", total);
-
+//        if (inputs.contains(input)) {
+//            inputs.remove(input);
+//            input.setHowMany(howMany);
+//            inputs.add(input);
+//        }
         return send;
     }
 

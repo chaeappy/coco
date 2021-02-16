@@ -10,10 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @SessionAttributes("order")
 @Controller
@@ -33,18 +31,17 @@ public class OrderController {
     @GetMapping("/orders/orderForm")
     public String orderForm(HttpSession httpSession, Model model) {
         HashMap<Long, Drink> drinks = orderService.menu();
-        ArrayList<Drink> menus = new ArrayList<Drink>(drinks.values());
+        ArrayList<Drink> menus = new ArrayList<>(drinks.values());
         model.addAttribute("menus", menus);
-        if (!model.containsAttribute("map")) {
-            model.addAttribute("map", new HashMap<String, Object>());
-            System.out.println("ok");
-        }
         return "orders/orderForm";
     }
 
 
+
+
     /**
      * 메뉴선택
+     * @return
      */
 
 //    @ResponseBody
@@ -55,20 +52,16 @@ public class OrderController {
 //    }
 
     @ResponseBody
-    @RequestMapping("/orders/orderForm")
-    public String selectMenu(@RequestBody String str,
-                             @ModelAttribute("map") HashMap<String, Object> map) {
+    @PostMapping("/orders/orderForm")
+    public HashMap<String, Object> selectMenu(@RequestBody String str) {
         Long pk = Long.valueOf(str);
-        orderService.selectMenu(pk);
         HashMap<String, Object> send = orderService.selectMenu(pk);
-        map.put("inputs", send.get("inputs"));
-        map.put("total", send.get("total"));
-        return "0";
+        return send;
     }
 
     @GetMapping("/orders/orderList")
-    public void orderList() {
-
+    public String orderList() {
+        return "orders/orderList";
     }
 
     @GetMapping("/payments")

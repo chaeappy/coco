@@ -14,11 +14,13 @@ package com.cafe.coco.domain;
 
 public class Input {
     private Drink drink;
+    private String name;
     private int howMany;
     private int total;
 
     public Input(Drink drink, int howMany) {
         this.drink = drink;
+        this.name = drink.getName();
         this.howMany = howMany;
         setTotal();
     }
@@ -27,6 +29,9 @@ public class Input {
         return drink;
     }
 
+    public String getName() {
+        return name;
+    }
 //    public void setDrink(Drink drink) {
 //        this.drink = drink;
 //    }
