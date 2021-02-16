@@ -55,9 +55,6 @@ public class Drink {
         this.price = price;
     }
 
-    public String getKind() {
-        return type;
-    }
 
     public void setKind(String kind) {
         this.type = kind;

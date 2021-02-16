@@ -30,9 +30,24 @@ public class OrderController {
 
     @GetMapping("/orders/orderForm")
     public String orderForm(HttpSession httpSession, Model model) {
+        ArrayList<Drink> coffee = new ArrayList<>();
+        ArrayList<Drink> latte = new ArrayList<>();
+        ArrayList<Drink> tea = new ArrayList<>();
+
         HashMap<Long, Drink> drinks = orderService.menu();
-        ArrayList<Drink> menus = new ArrayList<>(drinks.values());
-        model.addAttribute("menus", menus);
+
+        for (Drink drink : drinks.values()) {
+            if (drink.getType().equals("coffee")) {
+                coffee.add(drink);
+            } else if (drink.getType().equals("latte")) {
+                latte.add(drink);
+            } else if (drink.getType().equals("tea")) {
+                tea.add(drink);
+            }
+        }
+        model.addAttribute("coffee", coffee);
+        model.addAttribute("latte", latte);
+        model.addAttribute("tea", tea);
         return "orders/orderForm";
     }
 
