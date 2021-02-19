@@ -17,6 +17,7 @@
 <body>
 <div class="container">
     <div id="div_left">
+        <div id="div_left_box">
         <div class="w3-bar w3-black">
             <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'coffee')">COFFEE</button>
             <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'latte')">LATTE</button>
@@ -24,113 +25,114 @@
             <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'soda')">SODA</button>
             <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'etc')">ETC</button>
         </div>
-        <div id="coffee" class="w3-container w3-border city">
+        <div id="coffee" class="city">
             <table class="menu_table">
                 <thead>
-                <tr>
-                    <td>음료</td>
-                    <td>가격</td>
-                    <td>#</td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td class="td_title_drink">음료</td>-->
+<!--                    <td class="td_title_price">가격</td>-->
+<!--                    <td class="td_title_btn">#</td>-->
+<!--                </tr>-->
                 </thead>
-                <tbody id="table_body">
+                <tbody>
                 <tr th:each="drink : ${coffee}">
-                    <td th:id="${drink.name}" th:text="${drink.name}"></td>
-                    <td th:text="${drink.price}"></td>
-                    <td>
+                    <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
+                    <td class="td_price" th:text="${drink.price}"></td>
+                    <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
-                        <input type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
+                        <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <div id="latte" class="w3-container w3-border city" style="display:none">
-            <table>
+        <div id="latte" class="city" style="display:none">
+            <table class="menu_table">
                 <thead>
                 <tr>
-                    <td>음료</td>
-                    <td>가격</td>
-                    <td>#</td>
+                    <td class="td_title_drink">음료</td>
+                    <td class="td_title_price">가격</td>
+                    <td class="td_title_btn">#</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${latte}">
-                    <td th:id="${drink.name}" th:text="${drink.name}"></td>
+                    <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
                     <td th:text="${drink.price}"></td>
-                    <td>
+                    <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
-                        <input type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
+                        <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
-        <div id="tea" class="w3-container w3-border city" style="display:none">
-            <table>
+        <div id="tea" class="city" style="display:none">
+            <table class="menu_table">
                 <thead>
                 <tr>
-                    <td>음료</td>
-                    <td>가격</td>
-                    <td>#</td>
+                    <td class="td_title_drink">음료</td>
+                    <td class="td_title_price">가격</td>
+                    <td class="td_title_btn">#</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${tea}">
-                    <td th:id="${drink.name}" th:text="${drink.name}"></td>
+                    <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
                     <td th:text="${drink.price}"></td>
-                    <td>
+                    <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
-                        <input type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
+                        <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
-        <div id="soda" class="w3-container w3-border city" style="display:none">
-            <table>
+        <div id="soda" class="city" style="display:none">
+            <table class="menu_table">
                 <thead>
                 <tr>
-                    <td>음료</td>
-                    <td>가격</td>
-                    <td>#</td>
+                    <td class="td_title_drink">음료</td>
+                    <td class="td_title_price">가격</td>
+                    <td class="td_title_btn">#</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${soda}">
-                    <td th:id="${drink.name}" th:text="${drink.name}"></td>
+                    <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
                     <td th:text="${drink.price}"></td>
-                    <td>
+                    <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
-                        <input type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
+                        <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
-        <div id="etc" class="w3-container w3-border city" style="display:none">
-            <table>
+        <div id="etc" class="city" style="display:none">
+            <table class="menu_table">
                 <thead>
                 <tr>
-                    <td>음료</td>
-                    <td>가격</td>
-                    <td>#</td>
+                    <td class="td_title_drink">음료</td>
+                    <td class="td_title_price">가격</td>
+                    <td class="td_title_btn">#</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${etc}">
-                    <td th:id="${drink.name}" th:text="${drink.name}"></td>
+                    <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
                     <td th:text="${drink.price}"></td>
-                    <td>
+                    <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
-                        <input type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
+                        <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
                     </td>
                 </tr>
                 </tbody>
             </table>
+        </div>
         </div>
     </div> <!-- div_left-->
 

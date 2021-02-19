@@ -1,29 +1,69 @@
 @charset "UTF-8";
 
 tbody tr:nth-child(2n) {
-    background-color: #bbdefb;
+    background-color: white;
 }
 tbody tr:nth-child(2n+1) {
-    background-color: #e3f2fd;
+    background-color: #c9c8ca;
+}
+
+
+.td_choice_btn {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+td {
+    height: 80px;
+}
+
+.td_title_drink, .td_title_price, .td_title_btn {
+    text-align: center;
+}
+
+.td_menu_name {
+    padding-left: 30px;
+    width: 280px;
+}
+
+.td_price {
+    width: 120px;
+    text-align: center;
+}
+
+
+.choice_btn {
+    border: 3px solid ;
+    border-color: #727274;
+    border-radius: 15px;
+    padding: 5px 10px 5px 10px;
 }
 
 table {
   border-collapse: separate;
-  border-spacing: 30px;
+  border-spacing: 0 0px;
 }
+
 .menu_table {
-    border: 3px solid ;
+    border: 5px solid;
     border-color: #727274;
     border-radius: 15px;
     font-size: 200%;
+}
+
+div#div_left_box {
+    position: absolute;
+    right: 0px;
+    width: 70%;
+    height: 100%;
+    background-color: red;
 }
 div#div_left {
     position: absolute;
 	margin: 0 auto;
 	top: 0;
 	left: 0;
-	margin: 0 auto;
-	width: 70%;
+	width: 50%;
 	height: 100%;
     background-color: white;
 }
@@ -67,40 +107,4 @@ button#paymentBtn {
 	margin: 0 auto;
 	text-align: center;
 }
-.tab {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-#tabContent {
-	display: block;
-	background-color: green;
-	padding: 6px 12px;
-	color: #fff;
-}
-a{
-	display: inline-block;
-	color: #000;
-	text-align: center;
-	text-decoration: none;
-	padding: 14px 16px;
-	font-size: 17px;
-	transition: 0.3s;
-}
-a:visited {
-	color: black;
-	text-decoration: none;
 
-	}
-
-
-li {
-	float: left;
-	display: inline-block;
-	color: #000;
-	text-align: center;
-	text-decoration: none;
-	padding: 14px 16px;
-	font-size: 17px;
-}
