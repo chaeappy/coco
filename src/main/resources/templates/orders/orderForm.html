@@ -16,23 +16,27 @@
 </head>
 <body>
 <div class="container">
+    <div id="div_top"></div>
     <div id="div_left">
         <div id="div_left_box">
-        <div class="w3-bar w3-black">
-            <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'coffee')">COFFEE</button>
-            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'latte')">LATTE</button>
-            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'tea')">TEA</button>
-            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'soda')">SODA</button>
-            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'etc')">ETC</button>
-        </div>
+<!--        <div class="w3-bar w3-black">-->
+<!--            <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'coffee')">COFFEE</button>-->
+<!--            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'latte')">LATTE</button>-->
+<!--            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'tea')">TEA</button>-->
+<!--            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'soda')">SODA</button>-->
+<!--            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'etc')">ETC</button>-->
+<!--        </div>-->
+            <div class="bar_block w3-black w3-card" id="sidebar">
+                <h5 class="bar_item">Menu</h5>
+                <button class="bar_item w3-button tablink w3-red" onclick="openLink(event, 'coffee')">COFFEE</button>
+                <button class="bar_item w3-button tablink" onclick="openLink(event, 'latte')">LATTE</button>
+                <button class="bar_item w3-button tablink" onclick="openLink(event, 'tea')">TEA</button>
+                <button class="bar_item w3-button tablink" onclick="openLink(event, 'soda')">SODA</button>
+                <button class="bar_item w3-button tablink" onclick="openLink(event, 'etc')">ETC</button>
+            </div>
         <div id="coffee" class="city">
             <table class="menu_table">
                 <thead>
-<!--                <tr>-->
-<!--                    <td class="td_title_drink">음료</td>-->
-<!--                    <td class="td_title_price">가격</td>-->
-<!--                    <td class="td_title_btn">#</td>-->
-<!--                </tr>-->
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${coffee}">
@@ -49,16 +53,11 @@
         <div id="latte" class="city" style="display:none">
             <table class="menu_table">
                 <thead>
-                <tr>
-                    <td class="td_title_drink">음료</td>
-                    <td class="td_title_price">가격</td>
-                    <td class="td_title_btn">#</td>
-                </tr>
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${latte}">
                     <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
-                    <td th:text="${drink.price}"></td>
+                    <td class="td_price" th:text="${drink.price}"></td>
                     <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
                         <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
@@ -71,16 +70,11 @@
         <div id="tea" class="city" style="display:none">
             <table class="menu_table">
                 <thead>
-                <tr>
-                    <td class="td_title_drink">음료</td>
-                    <td class="td_title_price">가격</td>
-                    <td class="td_title_btn">#</td>
-                </tr>
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${tea}">
                     <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
-                    <td th:text="${drink.price}"></td>
+                    <td class="td_price" th:text="${drink.price}"></td>
                     <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
                         <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
@@ -93,16 +87,11 @@
         <div id="soda" class="city" style="display:none">
             <table class="menu_table">
                 <thead>
-                <tr>
-                    <td class="td_title_drink">음료</td>
-                    <td class="td_title_price">가격</td>
-                    <td class="td_title_btn">#</td>
-                </tr>
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${soda}">
                     <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
-                    <td th:text="${drink.price}"></td>
+                    <td class="td_price" th:text="${drink.price}"></td>
                     <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
                         <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
@@ -115,16 +104,11 @@
         <div id="etc" class="city" style="display:none">
             <table class="menu_table">
                 <thead>
-                <tr>
-                    <td class="td_title_drink">음료</td>
-                    <td class="td_title_price">가격</td>
-                    <td class="td_title_btn">#</td>
-                </tr>
                 </thead>
                 <tbody>
                 <tr th:each="drink : ${etc}">
                     <td class="td_menu_name" th:id="${drink.name}" th:text="${drink.name}"></td>
-                    <td th:text="${drink.price}"></td>
+                    <td class="td_price" th:text="${drink.price}"></td>
                     <td class="td_choice_btn">
                         <input type="hidden" th:name="pk" th:value="${drink.pk}"/>
                         <input class="choice_btn" type="submit" value="선택" th:onclick="'javascript:addInput(\''+ ${drink.pk} +'\');'"/>
@@ -138,16 +122,18 @@
 
 
     <div id="div_right">
+        <div id="div_right_total"></div>
+        <button type="button" id="paymentBtn" onclick="location.href='/payments'">완료</button>
     </div>
     <div id="div_right_footer">
-        <button type="button" id="paymentBtn" onclick="location.href='/payments'">완료</button>
+
     </div>
 </div> <!-- /container -->
 
 </body>
 <script type="text/javascript">
 
-    function openCity(evt, cityName) {
+    function openLink(evt, cityName) {
         var i, x, tablinks;
         x = document.getElementsByClassName("city");
         for (i = 0; i < x.length; i++) {
@@ -166,6 +152,7 @@
         var list = [];
         var total = 0;
         var html = "";
+        var html2 = "";
         $.ajax({
             type: "POST",
             url: "/orders/orderForm",
@@ -184,9 +171,15 @@
                 });
                     html += "<tr>";
                     html += "<td>" + "합계" + "</td>"
-                    html += "<td>" + total + "</td>";
                     html += "</tr>";
+
+                    html2 += "<tr>";
+                    html2 += "<td>" + total + "</td>";
+                    html2 += "</>tr>";
+
                     $("#div_right").html(html);
+                    $("#div_right_total").html(html2);
+
 
             }
         });
