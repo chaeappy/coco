@@ -122,12 +122,15 @@
 
 
     <div id="div_right">
-        <div id="div_right_total"></div>
-        <button type="button" id="paymentBtn" onclick="location.href='/payments'">완료</button>
-    </div>
-    <div id="div_right_footer">
-
-    </div>
+        <div id="div_right_input"></div>
+            <div id="div_right_box">
+                <div id="div_right_total_box">
+                    <div id="div_right_total"></div>
+                    <p id="p_total">원</p>
+                </div>
+                <button type="button" id="paymentBtn" onclick="location.href='/payments'">완료</button>
+            </div>
+    </div> <!-- div_right -->
 </div> <!-- /container -->
 
 </body>
@@ -169,15 +172,12 @@
                     html += "</tr>";
                     ++index;
                 });
-                    html += "<tr>";
-                    html += "<td>" + "합계" + "</td>"
-                    html += "</tr>";
 
                     html2 += "<tr>";
                     html2 += "<td>" + total + "</td>";
                     html2 += "</>tr>";
 
-                    $("#div_right").html(html);
+                    $("#div_right_input").html(html);
                     $("#div_right_total").html(html2);
 
 
